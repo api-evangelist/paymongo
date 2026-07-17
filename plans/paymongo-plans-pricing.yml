@@ -1,0 +1,213 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: PayMongo
+providerId: paymongo
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: true
+tags:
+- Payments
+- FinTech
+- Philippines
+- E-Wallet
+- Card Payments
+- Plans
+description: >-
+  PayMongo has no monthly subscription, setup, or maintenance fee for standard
+  accounts - it charges per successful transaction, with fees varying by payment
+  method. Rates below are the published Philippine-peso rates as of 2026-06-17
+  and are VAT-related per PayMongo's pricing page (verify current values before
+  relying on them). Payouts/disbursements via InstaPay or PESONet carry a small
+  fixed peso fee. Premium support and Instant Settlement are optional add-ons
+  priced as a percentage of volume.
+notes: >-
+  Per-method rates change; confirm against https://www.paymongo.com/pricing and
+  https://docs.paymongo.com/docs/fees-and-rates at reconciliation. Amounts in
+  the API are integers in centavos (1 PHP = 100).
+sources:
+- https://www.paymongo.com/pricing
+- https://docs.paymongo.com/docs/fees-and-rates
+plans:
+- id: paymongo-pay-as-you-go
+  name: Pay-as-you-go (per-transaction)
+  type: usage
+  description: >-
+    No monthly or setup fee; a per-successful-transaction fee is deducted per
+    payment method. This is the standard PayMongo pricing for all merchants.
+  entries:
+  - label: Credit/Debit Cards (Domestic Visa/Mastercard)
+    name: card_domestic
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 3.125% + PHP 13.39 per transaction
+    userMultiplied: false
+  - label: Credit/Debit Cards (International)
+    name: card_international
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: global
+    unit: 1
+    price: 4.02% + PHP 13.39 per transaction
+    userMultiplied: false
+  - label: GCash (e-wallet)
+    name: gcash
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 2.23% per transaction
+    userMultiplied: false
+  - label: Maya / PayMaya (e-wallet)
+    name: paymaya
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 1.79% per transaction
+    userMultiplied: false
+  - label: GrabPay (e-wallet)
+    name: grab_pay
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 1.96% per transaction
+    userMultiplied: false
+  - label: ShopeePay (e-wallet)
+    name: shopeepay
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 1.70% per transaction
+    userMultiplied: false
+  - label: QR Ph (in-store and online)
+    name: qrph
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 1.34% per transaction
+    userMultiplied: false
+  - label: BillEase (buy now, pay later)
+    name: billease
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 1.34% per transaction
+    userMultiplied: false
+  - label: Direct Online Banking (BPI, UnionBank via Brankas)
+    name: dob
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: 0.71% or PHP 13.39 per transaction
+    userMultiplied: false
+  elements:
+  - name: Payment Intents
+  - name: Payment Methods
+  - name: Checkout Sessions
+  - name: Payment Links
+  - name: QR Ph
+  - name: Refunds
+  - name: Subscriptions
+- id: paymongo-payouts
+  name: Payouts & Disbursements
+  type: usage
+  description: >-
+    Moving funds out of a PayMongo Wallet to a bank or e-wallet via InstaPay or
+    PESONet.
+  entries:
+  - label: Payout / Transfer (InstaPay or PESONet)
+    name: payout
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: PHP 10 per transaction
+    userMultiplied: false
+  elements:
+  - name: Wallets
+  - name: Transfers
+  - name: Batch Transfers
+  - name: Payouts
+- id: paymongo-add-ons
+  name: Optional Add-ons
+  type: usage
+  description: >-
+    Optional services layered on standard pricing - premium support tiers and
+    Instant Settlement for faster access to funds.
+  entries:
+  - label: Premium Support
+    name: premium_support
+    type: usage
+    metric: volume
+    limit: -1
+    timeFrame: month
+    geo: PH
+    unit: 1
+    price: 0.3%-0.5% of monthly transaction volume
+    userMultiplied: false
+  - label: Instant Settlement
+    name: instant_settlement
+    type: usage
+    metric: transaction
+    limit: -1
+    timeFrame: transaction
+    geo: PH
+    unit: 1
+    price: up to 2%-3% depending on method
+    userMultiplied: false
+  elements:
+  - name: Priority Support
+  - name: Instant Settlement
+- id: paymongo-enterprise
+  name: Enterprise / Custom
+  type: enterprise
+  description: >-
+    Negotiated rates and platform capabilities (child merchants, Ledgers-aaS,
+    Workflows-aaS, Capital) for platforms and higher-volume businesses. Contact
+    PayMongo sales.
+  entries:
+  - label: Custom Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: PH
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Platforms / Child Merchants
+  - name: Capital
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

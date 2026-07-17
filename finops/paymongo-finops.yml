@@ -1,0 +1,120 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: PayMongo
+providerId: paymongo
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: true
+tags:
+- Payments
+- FinTech
+- Philippines
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of PayMongo costs. Unlike compute/AI providers, PayMongo cost is
+  transaction-fee-based: a per-successful-transaction fee that varies by payment
+  method (cards, GCash, Maya, GrabPay, ShopeePay, QR Ph, BillEase, direct online
+  banking), plus a fixed peso fee on payouts/disbursements. Optional add-ons
+  (premium support, Instant Settlement) are a percentage of volume. There is no
+  monthly or setup fee. Costs are netted from settlement rather than invoiced as
+  cloud usage, so allocation is best driven from Payment and Payout records.
+notes: >-
+  Per-method rates change; verify against the PayMongo pricing and fees pages at
+  reconciliation. Fees are deducted at settlement; net_amount and fee fields on
+  the Payment resource are the primary cost signal.
+sources:
+- https://www.paymongo.com/pricing
+- https://docs.paymongo.com/docs/fees-and-rates
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: PayMongo
+serviceCategory: Financial Services
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per-Transaction
+  billingCurrency: PHP
+  chargeCategories:
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: PayMongo Payments
+  ServiceCategory: Financial Services
+  ProviderName: PayMongo
+  PublisherName: PayMongo
+  InvoiceIssuerName: PayMongo
+  BillingCurrency: PHP
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: card_transaction_fee
+  description: Per-successful-card-transaction fee (percentage + fixed PHP), domestic vs international.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+  - method
+  - card_region
+- name: ewallet_transaction_fee
+  description: Per-successful-transaction fee for GCash, Maya, GrabPay, ShopeePay.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+  - method
+- name: qrph_transaction_fee
+  description: Per-successful-transaction fee for QR Ph payments.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+- name: bnpl_transaction_fee
+  description: Per-successful-transaction fee for BillEase buy-now-pay-later.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+- name: dob_transaction_fee
+  description: Per-successful-transaction fee for direct online banking.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+- name: payout_fee
+  description: Fixed peso fee per payout/disbursement via InstaPay or PESONet.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+  - rail
+- name: instant_settlement_fee
+  description: Optional percentage fee for Instant Settlement access.
+  unit: transaction
+  aggregation: sum
+  dimensions:
+  - account
+- name: premium_support_fee
+  description: Optional premium-support fee as a percentage of monthly transaction volume.
+  unit: volume
+  aggregation: sum
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Reconcile from Payment (fee, net_amount) and Payout records; export payment/payout history from the dashboard.
+- name: Allocation
+  description: Tag transactions with metadata / reference numbers and map to internal cost centers and channels.
+- name: Optimization
+  description: Steer customers toward lower-fee methods where appropriate (QR Ph, direct online banking, e-wallets) vs cards; batch payouts to reduce fixed payout fees.
+- name: Accountability
+  description: Review effective take-rate per channel monthly; decide whether to pass on fees to customers where permitted.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

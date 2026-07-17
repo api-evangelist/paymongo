@@ -1,0 +1,24 @@
+generated: '2026-07-17'
+method: derived
+source: openapi/paymongo-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basic_auth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/paymongo-openapi.yml
+  - https://docs.paymongo.com/reference/authentication-1
+notes: >-
+  PayMongo uses HTTP Basic authentication. The API key is supplied as the
+  Basic-auth username (base64-encoded per the Basic scheme); the password
+  field is left blank for single-key calls. Secret keys (sk_test_* / sk_live_*)
+  are used for server-side calls; the public key (pk_test_* / pk_live_*) may be
+  used client-side for Payment Method creation. Some newer Workflow / Ledgers
+  surfaces additionally require an Organization-Id header. Webhook payloads are
+  verified separately via the Paymongo-Signature header (HMAC with the webhook
+  signing secret), which is a payload-integrity mechanism rather than a request
+  auth scheme. Live probe: GET https://api.paymongo.com/v1/payment_intents
+  returned HTTP 401 without credentials, confirming Basic auth is enforced.

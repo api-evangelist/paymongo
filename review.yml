@@ -1,0 +1,72 @@
+aid: paymongo
+name: PayMongo
+review:
+  question: Does PayMongo expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-17'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. PayMongo's only event surface is
+    outbound HTTP webhooks (signed POST callbacks with a Paymongo-Signature
+    header), plus client-side polling for redirect-based methods. There is no
+    WebSocket, SSE, or other streaming/bidirectional transport documented, so
+    nothing falls within AsyncAPI scope.
+findings:
+  summary: |
+    PayMongo does not publish a documented public WebSocket API. The platform
+    is a REST (HTTPS) API under https://api.paymongo.com/v1 using HTTP Basic
+    authentication. Asynchronous payment state changes (payment.paid,
+    payment.failed, source.chargeable, etc.) are delivered as outbound signed
+    HTTP webhook callbacks, not over a WebSocket. Redirect-based methods
+    (GCash, GrabPay, Maya) confirm via a browser redirect return_url and/or
+    webhook, and integrators may poll the resource for status. No realtime,
+    bidirectional ws:// or wss:// endpoint is documented anywhere in the
+    developer docs as of the review date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.paymongo.com/v1
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound signed HTTP POST callbacks (Paymongo-Signature header) for payment/source/subscription/payout events. One-way server-to-merchant HTTP, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in PayMongo's API reference, webhooks docs, or any product page as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.paymongo.com/v1/payment_intents
+    - GET  https://api.paymongo.com/v1/payment_intents/{id}
+    - POST https://api.paymongo.com/v1/payment_intents/{id}/attach
+    - POST https://api.paymongo.com/v1/payment_methods
+    - GET  https://api.paymongo.com/v1/payments
+    - POST https://api.paymongo.com/v1/sources
+    - POST https://api.paymongo.com/v1/checkout_sessions
+    - POST https://api.paymongo.com/v1/links
+    - POST https://api.paymongo.com/v1/customers
+    - POST https://api.paymongo.com/v1/refunds
+    - POST https://api.paymongo.com/v1/webhooks
+    - POST https://api.paymongo.com/v1/qr_codes/static
+sources:
+  - url: https://docs.paymongo.com/
+    type: Documentation
+    note: Developer docs (developers.paymongo.com 301-redirects here); REST base URL https://api.paymongo.com/v1, no WebSocket mentioned.
+  - url: https://docs.paymongo.com/llms.txt
+    type: Documentation
+    note: Machine-readable index of all docs pages and endpoints; all endpoints are HTTPS REST, event delivery is via webhooks only.
+  - url: https://docs.paymongo.com/docs/developer-tools-webhooks
+    type: Documentation
+    note: Event notifications are outbound HTTP POST webhooks with signature verification, explicitly to avoid polling; no WebSocket.
+  - url: https://docs.paymongo.com/reference/create-a-paymentintent
+    type: APIReference
+    note: Core workflow is REST over HTTPS with Basic auth; confirmed live GET /v1/payment_intents returns 401 (auth required).
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: false
+  reason: |
+    No WebSocket or streaming protocol surface exists, and PayMongo's only
+    async surface (outbound webhooks) is out of AsyncAPI scope under current
+    API Evangelist practice for this catalog entry, so no AsyncAPI document
+    was authored and no AsyncAPI pointer was added to apis.yml.

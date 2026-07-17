@@ -1,0 +1,40 @@
+generated: '2026-07-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: paymongo.com
+  https: true
+  server: CloudFront
+  cert_expires: Feb 20 23:59:59 2027 GMT
+  hsts: null
+- host: api.paymongo.com
+  https: true
+  cert_expires: Feb 20 23:59:59 2027 GMT
+  auth_required: true
+  probe_status: 401
+  hsts: null
+- host: docs.paymongo.com
+  https: true
+  note: developers.paymongo.com issues a 301 redirect to docs.paymongo.com
+domains:
+- domain: paymongo.com
+  dnssec: false
+  caa:
+  - 0 issue "pki.goog"
+  - 0 issue "amazon.com"
+  - 0 issue "digicert.com"
+  - 0 issue "globalsign.com"
+  - 0 issue "letsencrypt.org"
+  - 0 iodef "mailto:caa-violations@paymongo.com"
+  spf: true
+  spf_record: v=spf1 include:_spf.createsend.com include:_spf.google.com include:7079113.spf03.hubspotemail.net ~all
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_note: p=quarantine; sp=quarantine; pct=25; rua/ruf mailto:dmarc-report@paymongo.com
+notes: >-
+  api.paymongo.com and paymongo.com both serve valid TLS certificates (expiry
+  Feb 20 2027) fronted by AWS CloudFront. api.paymongo.com/v1 returns HTTP 401
+  without credentials, confirming enforced authentication. A CAA record scopes
+  issuance to a defined set of CAs with an iodef violation contact. SPF and
+  DMARC (quarantine) are published. No HSTS header was observed on the probed
+  hosts at probe time, and no /.well-known/security.txt was found (HTTP 404).

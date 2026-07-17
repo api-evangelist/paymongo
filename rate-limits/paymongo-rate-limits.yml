@@ -1,0 +1,53 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: PayMongo
+providerId: paymongo
+created: '2026-07-17'
+modified: '2026-07-17'
+reconciled: true
+tags:
+- Payments
+- FinTech
+- Philippines
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  PayMongo enforces a global request-rate cap on the REST API. Per the
+  developer documentation, if the request rate exceeds 100 requests per second
+  (6,000 per minute) requests are blocked; the block is automatically lifted
+  within the next minute once the rate returns to normal. Throttled requests
+  return HTTP 429 Too Many Requests. PayMongo recommends idempotency keys on
+  create calls so retries after a 429 do not double-charge.
+notes: >-
+  Verify the current limit at https://docs.paymongo.com/docs/rate-limiting-errors
+  (formerly developers.paymongo.com/docs/rate-limiting-errors) on reconciliation.
+sources:
+- https://docs.paymongo.com/docs/rate-limiting-errors
+- https://docs.paymongo.com/reference/idempotent-requests
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Second
+  scope: account
+  metric: requests
+  limit: 100
+  window: 1s
+  notes: Exceeding this blocks requests until the rate normalizes (auto-lifted within the next minute).
+- name: Requests Per Minute
+  scope: account
+  metric: requests
+  limit: 6000
+  window: 60s
+  notes: Equivalent per-minute expression of the 100 req/s cap.
+policies:
+- name: Automatic Unblock
+  description: Blocks are automatically lifted within the following minute once the request rate drops back below the threshold.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on HTTP 429 responses.
+- name: Idempotency
+  description: Send an idempotency key on create requests so that safe retries after a 429 or network failure do not create duplicate charges.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

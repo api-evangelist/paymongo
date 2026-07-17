@@ -1,0 +1,344 @@
+{
+  "info": {
+    "name": "PayMongo API",
+    "description": "PayMongo REST API - Payment Intents / Payment Methods workflow, Sources (legacy GCash/GrabPay), Checkout Sessions, Payment Links, Customers, Refunds, QR Ph, and Webhooks. Base URL https://api.paymongo.com/v1. Auth is HTTP Basic: put your secret key (sk_test_* / sk_live_*) in the username field, leave the password blank. Amounts are integers in centavos (1 PHP = 100). Modeled from https://docs.paymongo.com.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      { "key": "username", "value": "{{secret_key}}", "type": "string" },
+      { "key": "password", "value": "", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.paymongo.com/v1", "type": "string" },
+    { "key": "secret_key", "value": "sk_test_xxx", "type": "string" },
+    { "key": "public_key", "value": "pk_test_xxx", "type": "string" },
+    { "key": "payment_intent_id", "value": "pi_xxx", "type": "string" },
+    { "key": "payment_method_id", "value": "pm_xxx", "type": "string" },
+    { "key": "payment_id", "value": "pay_xxx", "type": "string" },
+    { "key": "source_id", "value": "src_xxx", "type": "string" },
+    { "key": "checkout_session_id", "value": "cs_xxx", "type": "string" },
+    { "key": "link_id", "value": "link_xxx", "type": "string" },
+    { "key": "customer_id", "value": "cus_xxx", "type": "string" },
+    { "key": "refund_id", "value": "ref_xxx", "type": "string" },
+    { "key": "webhook_id", "value": "hook_xxx", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Payment Intents",
+      "item": [
+        {
+          "name": "Create a Payment Intent",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/payment_intents", "host": ["{{baseUrl}}"], "path": ["payment_intents"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": 10000,\n      \"currency\": \"PHP\",\n      \"payment_method_allowed\": [\"card\", \"gcash\", \"grab_pay\", \"paymaya\"],\n      \"capture_type\": \"automatic\",\n      \"description\": \"Order #1234\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Payment Intent",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/payment_intents/{{payment_intent_id}}", "host": ["{{baseUrl}}"], "path": ["payment_intents", "{{payment_intent_id}}"] }
+          }
+        },
+        {
+          "name": "Attach to a Payment Intent",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/payment_intents/{{payment_intent_id}}/attach", "host": ["{{baseUrl}}"], "path": ["payment_intents", "{{payment_intent_id}}", "attach"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"payment_method\": \"{{payment_method_id}}\",\n      \"return_url\": \"https://example.com/return\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Methods",
+      "item": [
+        {
+          "name": "Create a Payment Method (GCash)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/payment_methods", "host": ["{{baseUrl}}"], "path": ["payment_methods"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"gcash\",\n      \"billing\": {\n        \"name\": \"Juan dela Cruz\",\n        \"email\": \"juan@example.com\",\n        \"phone\": \"+639171234567\"\n      }\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Payment Method",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/payment_methods/{{payment_method_id}}", "host": ["{{baseUrl}}"], "path": ["payment_methods", "{{payment_method_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "List all Payments",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/payments?limit=10", "host": ["{{baseUrl}}"], "path": ["payments"], "query": [{ "key": "limit", "value": "10" }] }
+          }
+        },
+        {
+          "name": "Retrieve a Payment",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/payments/{{payment_id}}", "host": ["{{baseUrl}}"], "path": ["payments", "{{payment_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sources (legacy GCash/GrabPay)",
+      "item": [
+        {
+          "name": "Create a Source",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/sources", "host": ["{{baseUrl}}"], "path": ["sources"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": 10000,\n      \"currency\": \"PHP\",\n      \"type\": \"gcash\",\n      \"redirect\": {\n        \"success\": \"https://example.com/success\",\n        \"failed\": \"https://example.com/failed\"\n      }\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Source",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/sources/{{source_id}}", "host": ["{{baseUrl}}"], "path": ["sources", "{{source_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Checkout Sessions",
+      "item": [
+        {
+          "name": "Create a Checkout Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/checkout_sessions", "host": ["{{baseUrl}}"], "path": ["checkout_sessions"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"line_items\": [\n        { \"name\": \"T-shirt\", \"quantity\": 1, \"amount\": 50000, \"currency\": \"PHP\" }\n      ],\n      \"payment_method_types\": [\"card\", \"gcash\", \"grab_pay\", \"paymaya\"],\n      \"success_url\": \"https://example.com/success\",\n      \"cancel_url\": \"https://example.com/cancel\",\n      \"description\": \"Order #1234\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Checkout Session",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/checkout_sessions/{{checkout_session_id}}", "host": ["{{baseUrl}}"], "path": ["checkout_sessions", "{{checkout_session_id}}"] }
+          }
+        },
+        {
+          "name": "Expire a Checkout Session",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/checkout_sessions/{{checkout_session_id}}/expire", "host": ["{{baseUrl}}"], "path": ["checkout_sessions", "{{checkout_session_id}}", "expire"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Links",
+      "item": [
+        {
+          "name": "Create a Payment Link",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/links", "host": ["{{baseUrl}}"], "path": ["links"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": 150000,\n      \"description\": \"Invoice for June services\",\n      \"remarks\": \"Thank you!\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Payment Link",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/links/{{link_id}}", "host": ["{{baseUrl}}"], "path": ["links", "{{link_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create a Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"first_name\": \"Juan\",\n      \"last_name\": \"dela Cruz\",\n      \"email\": \"juan@example.com\",\n      \"phone\": \"+639171234567\",\n      \"default_device\": \"email\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Customer",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/customers/{{customer_id}}", "host": ["{{baseUrl}}"], "path": ["customers", "{{customer_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Refunds",
+      "item": [
+        {
+          "name": "Create a Refund",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/refunds", "host": ["{{baseUrl}}"], "path": ["refunds"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": 10000,\n      \"payment_id\": \"{{payment_id}}\",\n      \"reason\": \"requested_by_customer\",\n      \"notes\": \"Customer changed their mind\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a Refund",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/refunds/{{refund_id}}", "host": ["{{baseUrl}}"], "path": ["refunds", "{{refund_id}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QR Ph",
+      "item": [
+        {
+          "name": "Create a static QR Ph code",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/qr_codes/static", "host": ["{{baseUrl}}"], "path": ["qr_codes", "static"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Counter 1\"\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Create a Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"url\": \"https://example.com/paymongo/webhook\",\n      \"events\": [\"payment.paid\", \"payment.failed\", \"source.chargeable\"]\n    }\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "List Webhooks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/webhooks", "host": ["{{baseUrl}}"], "path": ["webhooks"] }
+          }
+        },
+        {
+          "name": "Disable a Webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/webhooks/{{webhook_id}}/disable", "host": ["{{baseUrl}}"], "path": ["webhooks", "{{webhook_id}}", "disable"] }
+          }
+        },
+        {
+          "name": "Enable a Webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/webhooks/{{webhook_id}}/enable", "host": ["{{baseUrl}}"], "path": ["webhooks", "{{webhook_id}}", "enable"] }
+          }
+        }
+      ]
+    }
+  ]
+}

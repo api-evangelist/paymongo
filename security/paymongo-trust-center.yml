@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: searched
+probe: true
+source: https://www.paymongo.com/secure
+url: https://www.paymongo.com/secure
+certifications:
+- PCI DSS Level 1 Service Provider
+compliance:
+- Regulated under Bangko Sentral ng Pilipinas (BSP) as an Operator of Payment System (OPS)
+practices:
+- 3D Secure (3DS) authentication for card payments
+- Third-party vulnerability scanning and penetration testing
+- Data encryption in transit (TLS) and at rest
+- Tokenization / card vaulting so merchants avoid handling raw PAN
+evidence:
+- source: https://www.paymongo.com/secure
+  keywords:
+  - pci dss level 1
+  - enterprise-level security
+  - encryption
+  - penetration testing
+- source: https://docs.paymongo.com/docs/payment-acceptance-best-practices
+  keywords:
+  - pci dss scope
+  - merchant responsibility
+  - 3d secure
+notes: >-
+  PayMongo is a PCI DSS Level 1 Service Provider (the highest merchant/service-
+  provider tier), audited by independent PCI-certified assessors, and is a
+  BSP-regulated payment operator in the Philippines. PayMongo does not publish a
+  dedicated third-party trust portal (e.g. a Vanta/SafeBase trust center);
+  security posture is documented on paymongo.com/secure and in the developer
+  best-practices guide.

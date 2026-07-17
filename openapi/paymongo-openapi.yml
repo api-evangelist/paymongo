@@ -1,0 +1,889 @@
+# Provenance: modeled-from-docs. PayMongo does not publish a downloadable
+# first-party OpenAPI document. This specification was hand-modeled from the
+# official developer documentation at https://docs.paymongo.com (API Reference,
+# formerly developers.paymongo.com which now 301-redirects to docs.paymongo.com)
+# and the machine-readable index at https://docs.paymongo.com/llms.txt.
+# Verified live: GET https://api.paymongo.com/v1/payment_intents -> 401 (Basic auth required).
+# Base URL, Basic-auth scheme (public key = username, secret key = password),
+# PHP-only currency, and amount-in-centavos were confirmed against the docs on 2026-07-17.
+openapi: 3.0.3
+info:
+  title: PayMongo API
+  description: >-
+    PayMongo is a Philippine payments platform. The REST API lets businesses
+    accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay,
+    QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the
+    Payment Intent / Payment Method workflow, hosted Checkout Sessions,
+    Payment Links, Customers, Refunds, and Webhooks. All amounts are integers
+    in centavos (1 PHP = 100). PHP is the only settlement currency (card
+    intents may optionally be switched to USD).
+  version: '2020-08-08'
+  termsOfService: https://www.paymongo.com/terms
+  contact:
+    name: PayMongo Developer Support
+    email: support@paymongo.com
+    url: https://docs.paymongo.com
+servers:
+  - url: https://api.paymongo.com/v1
+    description: Production (live and test mode selected by API key prefix)
+security:
+  - basicAuth: []
+tags:
+  - name: Payment Intents
+  - name: Payment Methods
+  - name: Payments
+  - name: Sources
+  - name: Checkout Sessions
+  - name: Payment Links
+  - name: Customers
+  - name: Refunds
+  - name: Webhooks
+  - name: QR Ph
+paths:
+  /payment_intents:
+    post:
+      operationId: createPaymentIntent
+      tags: [Payment Intents]
+      summary: Create a Payment Intent
+      description: >-
+        Creates a Payment Intent that tracks the lifecycle of a payment. Uses
+        the secret API key. Amount is an integer in centavos (minimum 2000 =
+        PHP 20.00 for most methods).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentIntentCreate'
+      responses:
+        '200':
+          description: Payment Intent created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntentResource'
+        '400': { $ref: '#/components/responses/Error' }
+        '401': { $ref: '#/components/responses/Error' }
+  /payment_intents/{id}:
+    get:
+      operationId: retrievePaymentIntent
+      tags: [Payment Intents]
+      summary: Retrieve a Payment Intent
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+        - name: client_key
+          in: query
+          required: false
+          schema: { type: string }
+          description: Client key allowing retrieval with the public key (client-side).
+      responses:
+        '200':
+          description: Payment Intent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntentResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /payment_intents/{id}/attach:
+    post:
+      operationId: attachPaymentIntent
+      tags: [Payment Intents]
+      summary: Attach a Payment Method to a Payment Intent
+      description: >-
+        Attaches a Payment Method to a Payment Intent to attempt the payment.
+        For redirect-based methods (GCash, GrabPay, Maya) the response contains
+        a next_action.redirect.url the customer must be sent to.
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentIntentAttach'
+      responses:
+        '200':
+          description: Payment Intent after attach
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntentResource'
+        '400': { $ref: '#/components/responses/Error' }
+  /payment_methods:
+    post:
+      operationId: createPaymentMethod
+      tags: [Payment Methods]
+      summary: Create a Payment Method
+      description: >-
+        Creates a Payment Method describing how the customer pays (card, gcash,
+        grab_pay, paymaya, billease, dob, qrph). May be created with the public
+        or secret API key.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodCreate'
+      responses:
+        '200':
+          description: Payment Method created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResource'
+        '400': { $ref: '#/components/responses/Error' }
+  /payment_methods/{id}:
+    get:
+      operationId: retrievePaymentMethod
+      tags: [Payment Methods]
+      summary: Retrieve a Payment Method
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Payment Method
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /payments:
+    get:
+      operationId: listPayments
+      tags: [Payments]
+      summary: List all Payments
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 10, maximum: 100 }
+        - name: before
+          in: query
+          schema: { type: string }
+        - name: after
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: A list of Payment resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentList'
+  /payments/{id}:
+    get:
+      operationId: retrievePayment
+      tags: [Payments]
+      summary: Retrieve a Payment
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Payment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /sources:
+    post:
+      operationId: createSource
+      tags: [Sources]
+      summary: Create a Source (legacy GCash / GrabPay workflow)
+      description: >-
+        Legacy Sources workflow for GCash and GrabPay. Generates a redirect
+        checkout_url the customer authorizes. PayMongo recommends migrating to
+        the Payment Intent workflow.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCreate'
+      responses:
+        '200':
+          description: Source created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceResource'
+        '400': { $ref: '#/components/responses/Error' }
+  /sources/{id}:
+    get:
+      operationId: retrieveSource
+      tags: [Sources]
+      summary: Retrieve a Source
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /checkout_sessions:
+    post:
+      operationId: createCheckoutSession
+      tags: [Checkout Sessions]
+      summary: Create a Checkout Session (Hosted Checkout)
+      description: >-
+        Creates a PayMongo-hosted checkout page. Returns checkout_url to which
+        the customer is redirected.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSessionCreate'
+      responses:
+        '200':
+          description: Checkout Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400': { $ref: '#/components/responses/Error' }
+  /checkout_sessions/{id}:
+    get:
+      operationId: retrieveCheckoutSession
+      tags: [Checkout Sessions]
+      summary: Retrieve a Checkout Session
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Checkout Session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /checkout_sessions/{id}/expire:
+    post:
+      operationId: expireCheckoutSession
+      tags: [Checkout Sessions]
+      summary: Expire a Checkout Session
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Checkout Session expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+  /links:
+    post:
+      operationId: createPaymentLink
+      tags: [Payment Links]
+      summary: Create a Payment Link
+      description: >-
+        Creates a shareable Payment Link. (The newer Payment Links surface is
+        also available under /payment_links.)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentLinkCreate'
+      responses:
+        '200':
+          description: Payment Link created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400': { $ref: '#/components/responses/Error' }
+  /links/{id}:
+    get:
+      operationId: retrievePaymentLink
+      tags: [Payment Links]
+      summary: Retrieve a Payment Link
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Payment Link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /customers:
+    post:
+      operationId: createCustomer
+      tags: [Customers]
+      summary: Create a Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+      responses:
+        '200':
+          description: Customer created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400': { $ref: '#/components/responses/Error' }
+    get:
+      operationId: listCustomers
+      tags: [Customers]
+      summary: List Customers
+      responses:
+        '200':
+          description: A list of Customers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericList'
+  /customers/{id}:
+    get:
+      operationId: retrieveCustomer
+      tags: [Customers]
+      summary: Retrieve a Customer
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404': { $ref: '#/components/responses/Error' }
+    patch:
+      operationId: updateCustomer
+      tags: [Customers]
+      summary: Update a Customer
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreate'
+      responses:
+        '200':
+          description: Customer updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+    delete:
+      operationId: deleteCustomer
+      tags: [Customers]
+      summary: Delete a Customer
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Customer deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+  /refunds:
+    post:
+      operationId: createRefund
+      tags: [Refunds]
+      summary: Create a Refund
+      description: >-
+        Refunds all or part of a Payment. Amount is an integer in centavos;
+        reason is one of duplicate, fraudulent, requested_by_customer, others.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefundCreate'
+      responses:
+        '200':
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400': { $ref: '#/components/responses/Error' }
+    get:
+      operationId: listRefunds
+      tags: [Refunds]
+      summary: List Refunds
+      responses:
+        '200':
+          description: A list of Refunds
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericList'
+  /refunds/{id}:
+    get:
+      operationId: retrieveRefund
+      tags: [Refunds]
+      summary: Retrieve a Refund
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Refund
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /qr_codes/static:
+    post:
+      operationId: createStaticQrPh
+      tags: [QR Ph]
+      summary: Create a static QR Ph code
+      description: Creates a reusable static QR Ph code for in-store acceptance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericCreate'
+      responses:
+        '200':
+          description: Static QR Ph created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400': { $ref: '#/components/responses/Error' }
+  /webhooks:
+    post:
+      operationId: createWebhook
+      tags: [Webhooks]
+      summary: Create a Webhook
+      description: >-
+        Registers a webhook endpoint subscribed to event types. Deliveries are
+        signed HTTP POST callbacks (Paymongo-Signature header) - not a
+        WebSocket. Each webhook has a signing secret used to verify payloads.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '200':
+          description: Webhook created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400': { $ref: '#/components/responses/Error' }
+    get:
+      operationId: listWebhooks
+      tags: [Webhooks]
+      summary: List Webhooks
+      responses:
+        '200':
+          description: A list of Webhooks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericList'
+  /webhooks/{id}:
+    get:
+      operationId: retrieveWebhook
+      tags: [Webhooks]
+      summary: Retrieve a Webhook
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Webhook
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404': { $ref: '#/components/responses/Error' }
+  /webhooks/{id}/enable:
+    post:
+      operationId: enableWebhook
+      tags: [Webhooks]
+      summary: Enable a Webhook
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Webhook enabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+  /webhooks/{id}/disable:
+    post:
+      operationId: disableWebhook
+      tags: [Webhooks]
+      summary: Disable a Webhook
+      parameters:
+        - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Webhook disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication. Provide your API key as the Basic-auth
+        username (secret key sk_test_* / sk_live_* for server-side calls;
+        for calls that accept the public key pk_test_* / pk_live_*, the public
+        key goes in the username field). The password field is left blank
+        unless a call requires both keys.
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema: { type: string }
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    PaymentIntentCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [amount, payment_method_allowed, currency]
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in centavos (integer). Minimum typically 2000 (PHP 20.00).
+                  example: 10000
+                currency:
+                  type: string
+                  description: Three-letter ISO currency code, uppercase. PHP is the default and only settlement currency (card intents may be switched to USD).
+                  example: PHP
+                payment_method_allowed:
+                  type: array
+                  items:
+                    type: string
+                    enum: [card, gcash, grab_pay, paymaya, billease, dob, qrph]
+                  example: [card, gcash, grab_pay, paymaya]
+                capture_type:
+                  type: string
+                  enum: [automatic, manual]
+                  default: automatic
+                description:
+                  type: string
+                statement_descriptor:
+                  type: string
+                metadata:
+                  type: object
+                  additionalProperties: true
+    PaymentIntentAttach:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [payment_method]
+              properties:
+                payment_method:
+                  type: string
+                  description: The Payment Method id (pm_...) to attach.
+                client_key:
+                  type: string
+                return_url:
+                  type: string
+                  description: URL the customer is redirected to after off-site authorization.
+    PaymentIntentResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: { type: string, example: pi_xxx }
+            type: { type: string, example: payment_intent }
+            attributes:
+              type: object
+              properties:
+                amount: { type: integer }
+                currency: { type: string }
+                status:
+                  type: string
+                  enum: [awaiting_payment_method, awaiting_next_action, processing, succeeded, cancelled]
+                client_key: { type: string }
+                next_action:
+                  type: object
+                  nullable: true
+                  properties:
+                    type: { type: string, example: redirect }
+                    redirect:
+                      type: object
+                      properties:
+                        url: { type: string }
+                        return_url: { type: string }
+    PaymentMethodCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [type]
+              properties:
+                type:
+                  type: string
+                  enum: [card, gcash, grab_pay, paymaya, billease, dob, qrph]
+                details:
+                  type: object
+                  description: Card details (number, exp_month, exp_year, cvc) when type=card.
+                  properties:
+                    card_number: { type: string }
+                    exp_month: { type: integer }
+                    exp_year: { type: integer }
+                    cvc: { type: string }
+                billing:
+                  type: object
+                  properties:
+                    name: { type: string }
+                    email: { type: string }
+                    phone: { type: string }
+                metadata:
+                  type: object
+                  additionalProperties: true
+    PaymentMethodResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: { type: string, example: pm_xxx }
+            type: { type: string, example: payment_method }
+            attributes:
+              type: object
+              properties:
+                type: { type: string }
+                billing: { type: object }
+    PaymentResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: { type: string, example: pay_xxx }
+            type: { type: string, example: payment }
+            attributes:
+              type: object
+              properties:
+                amount: { type: integer }
+                currency: { type: string }
+                fee: { type: integer }
+                net_amount: { type: integer }
+                status: { type: string, enum: [pending, paid, failed] }
+                source: { type: object }
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResource'
+        has_more: { type: boolean }
+    SourceCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [amount, currency, type, redirect]
+              properties:
+                amount: { type: integer, description: Amount in centavos. }
+                currency: { type: string, example: PHP }
+                type:
+                  type: string
+                  enum: [gcash, grab_pay]
+                redirect:
+                  type: object
+                  required: [success, failed]
+                  properties:
+                    success: { type: string }
+                    failed: { type: string }
+    SourceResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: { type: string, example: src_xxx }
+            type: { type: string, example: source }
+            attributes:
+              type: object
+              properties:
+                amount: { type: integer }
+                currency: { type: string }
+                status: { type: string, enum: [pending, chargeable, cancelled, expired, paid] }
+                type: { type: string }
+                redirect:
+                  type: object
+                  properties:
+                    checkout_url: { type: string }
+                    success: { type: string }
+                    failed: { type: string }
+    CheckoutSessionCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [line_items, payment_method_types]
+              properties:
+                line_items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name: { type: string }
+                      quantity: { type: integer }
+                      amount: { type: integer }
+                      currency: { type: string, example: PHP }
+                payment_method_types:
+                  type: array
+                  items:
+                    type: string
+                    enum: [card, gcash, grab_pay, paymaya, billease, dob, qrph]
+                success_url: { type: string }
+                cancel_url: { type: string }
+                description: { type: string }
+    PaymentLinkCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [amount, description]
+              properties:
+                amount: { type: integer, description: Amount in centavos. }
+                description: { type: string }
+                remarks: { type: string }
+    CustomerCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [first_name, last_name, email, phone, default_device]
+              properties:
+                first_name: { type: string }
+                last_name: { type: string }
+                email: { type: string }
+                phone: { type: string }
+                default_device: { type: string, enum: [email, phone] }
+    RefundCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [amount, payment_id, reason]
+              properties:
+                amount: { type: integer, description: Amount in centavos to refund. }
+                payment_id: { type: string, example: pay_xxx }
+                reason:
+                  type: string
+                  enum: [duplicate, fraudulent, requested_by_customer, others]
+                notes: { type: string }
+    WebhookCreate:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required: [url, events]
+              properties:
+                url: { type: string }
+                events:
+                  type: array
+                  items:
+                    type: string
+                    example: payment.paid
+    GenericCreate:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              additionalProperties: true
+    GenericResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id: { type: string }
+            type: { type: string }
+            attributes:
+              type: object
+              additionalProperties: true
+    GenericList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericResource'
+        has_more: { type: boolean }
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code: { type: string }
+              detail: { type: string }
+              source:
+                type: object
+                properties:
+                  pointer: { type: string }
+                  attribute: { type: string }
