@@ -1,0 +1,51 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.paymongo.com/docs/developer-tools-webhooks-events
+spec_type: Webhooks
+description: >-
+  PayMongo's webhook event catalog. PayMongo does NOT publish an AsyncAPI
+  document; it delivers signed HTTP POST callbacks (not a WebSocket/stream). Each
+  delivery is a JSON event with data.attributes.type set to one of the event
+  types below, and is verified via the Paymongo-Signature header (HMAC with the
+  endpoint's signing secret). Event names captured verbatim from the events doc.
+delivery:
+  transport: HTTP POST callback to a registered endpoint
+  signature_header: Paymongo-Signature
+  verification: HMAC using the webhook endpoint's signing secret
+  envelope: '{ "data": { "id": "evt_...", "type": "event", "attributes": { "type": <event_type>, "livemode": bool, "created_at": int, "data": { <resource> } } } }'
+  management_operations:
+    - 'openapi/paymongo-openapi.yml#createWebhook'
+    - 'openapi/paymongo-openapi.yml#listWebhooks'
+    - 'openapi/paymongo-openapi.yml#retrieveWebhook'
+    - 'openapi/paymongo-openapi.yml#enableWebhook'
+    - 'openapi/paymongo-openapi.yml#disableWebhook'
+events:
+  payment_acceptance:
+    - {type: payment.paid, resource: payment, description: A payment succeeded.}
+    - {type: payment.failed, resource: payment, description: A payment attempt failed.}
+    - {type: payment_intent.succeeded, resource: payment_intent, description: A Payment Intent reached succeeded.}
+    - {type: payment_intent.awaiting_payment_method, resource: payment_intent, description: A Payment Intent needs a (new) payment method attached.}
+  disputes:
+    - {type: dispute.created, resource: dispute, description: A chargeback/dispute was opened.}
+    - {type: dispute.resolved, resource: dispute, description: A dispute was resolved.}
+  refunds:
+    - {type: refund.succeeded, resource: refund, description: A refund completed.}
+  qr:
+    - {type: qr.paid, resource: qrph, description: A QR Ph code was paid.}
+    - {type: qr.expired, resource: qrph, description: A QR Ph code expired unpaid.}
+  payouts:
+    - {type: payout.deposited, resource: payout, description: A payout was deposited to the bank/e-wallet.}
+    - {type: payout.returned, resource: payout, description: A payout was returned.}
+  subscriptions:
+    - {type: subscription.activated, resource: subscription, description: A subscription became active.}
+    - {type: subscription.updated, resource: subscription, description: A subscription was updated.}
+    - {type: subscription.past_due, resource: subscription, description: A subscription is past due.}
+    - {type: subscription.unpaid, resource: subscription, description: A subscription is unpaid.}
+    - {type: subscription.invoice.created, resource: invoice, description: A subscription invoice was created.}
+    - {type: subscription.invoice.finalized, resource: invoice, description: A subscription invoice was finalized.}
+    - {type: subscription.invoice.updated, resource: invoice, description: A subscription invoice was updated.}
+    - {type: subscription.invoice.paid, resource: invoice, description: A subscription invoice was paid.}
+    - {type: subscription.invoice.payment_failed, resource: invoice, description: A subscription invoice payment failed.}
+  workflow:
+    - {type: workflow.completed, resource: workflow, description: A workflow run completed.}
+    - {type: workflow.failed, resource: workflow, description: A workflow run failed.}

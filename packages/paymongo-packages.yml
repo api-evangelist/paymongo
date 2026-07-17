@@ -1,0 +1,38 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://developers.paymongo.com/docs/community-made-libraries and the public
+  package registries (Packagist, npm) plus the paymongo GitHub organization
+  (https://github.com/paymongo). PayMongo maintains first-party SDKs for PHP and
+  Node.js; Python and other languages are covered by community libraries.
+packages:
+  - language: php
+    registry: packagist
+    name: paymongo/paymongo-php
+    url: https://packagist.org/packages/paymongo/paymongo-php
+    source: https://github.com/paymongo/paymongo-php
+    install: composer require paymongo/paymongo-php
+    official: true
+    notes: Official PayMongo PHP SDK (vendor namespace paymongo/). ~11.8k Packagist downloads at fetch time.
+  - language: javascript
+    registry: npm
+    name: paymongo-node
+    url: https://www.npmjs.com/package/paymongo-node
+    source: https://github.com/paymongo/paymongo-node
+    install: npm install paymongo-node
+    official: true
+    notes: Official PayMongo Node.js library (github.com/paymongo/paymongo-node).
+  - language: python
+    registry: pypi
+    name: paymongo
+    url: https://github.com/bailabs/paymongo
+    source: https://github.com/bailabs/paymongo
+    official: false
+    notes: Community-made Python library (bailabs), listed on PayMongo's community-libraries page. Not first-party.
+  - language: javascript
+    registry: npm
+    name: paymongo
+    url: https://www.npmjs.com/package/paymongo
+    source: https://github.com/jofftiquez/paymongo
+    official: false
+    notes: Community Node.js client (OSSPhilippines / Jofferson Tiquez). Not first-party.

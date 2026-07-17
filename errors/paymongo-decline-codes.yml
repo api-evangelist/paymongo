@@ -1,0 +1,66 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.paymongo.com/docs/payment-acceptance-errors-card
+description: >-
+  PayMongo's card decline / block / processor error taxonomy — the issuer- and
+  processor-level reasons a card payment fails. Distinct from the API-level
+  errors in errors/paymongo-problem-types.yml: these appear as the `sub_code`
+  on a failed card payment. PayMongo explicitly advises NOT exposing the
+  "blocked" (fraud/lost/stolen) sub codes to buyers — present them as a generic
+  decline.
+docs: https://docs.paymongo.com/docs/payment-acceptance-errors-card
+envelope_field: errors[].sub_code
+mask_as_generic:
+  - fraudulent
+  - highest_risk_level
+  - lost_card
+  - pickup_card
+  - processor_blocked
+  - restricted_card
+  - stolen_card
+  - blocked
+declined_transactions:
+  - {code: generic_decline, meaning: Card declined for an unknown reason, action: Contact issuer or use a different card/payment method.}
+  - {code: do_not_honor, meaning: Card declined for an unknown reason, action: Contact issuer or use a different card/payment method.}
+  - {code: payment_refused, meaning: Card declined for an unknown reason, action: Use a different card or other form of payment.}
+  - {code: insufficient_funds, meaning: Card has insufficient funds, action: Use a different card or other form of payment.}
+  - {code: debit_card_usage_limit_exceeded, meaning: Debit card use frequency or max amount per use exceeded, action: Use a different card or payment method.}
+  - {code: issuer_declined, meaning: Declined by the issuer for an unknown reason, action: Customer contacts the issuing bank.}
+  - {code: issuer_not_available, meaning: Card issuer could not be reached, action: Wait a few minutes and resend the request.}
+  - {code: amount_allowed_exceeded, meaning: Payment amount invalid or exceeds the allowed amount, action: Customer verifies purchase limit with issuer.}
+  - {code: call_card_issuer, meaning: Unable to process; contact card issuer, action: Customer contacts the issuing bank.}
+  - {code: card_not_supported, meaning: Card does not support this type of purchase, action: Customer contacts issuer about card capabilities.}
+  - {code: card_type_mismatch, meaning: Card type invalid or mismatched with the number, action: Confirm card type matches the number and resend.}
+  - {code: card_unauthorized, meaning: Card inactive or not authorized for card-not-present, action: Customer contacts issuer or uses a different card.}
+  - {code: credit_limit_exceeded, meaning: Card has reached its credit limit, action: Use a different card or payment method.}
+  - {code: currency_not_supported_by_card_issuer, meaning: Card does not support the specified currency, action: Customer checks currency support with the issuer.}
+blocked_transactions:
+  - {code: fraudulent, meaning: Suspected fraudulent payment, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: highest_risk_level, meaning: Suspected high risk of fraud, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: lost_card, meaning: Card reported lost, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: pickup_card, meaning: Card reported lost or stolen, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: processor_blocked, meaning: Blocked as suspected fraudulent by the processor, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: restricted_card, meaning: Card reported lost or stolen, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: stolen_card, meaning: Card reported stolen, action: Do not reveal; present as a generic decline., masked: true}
+  - {code: blocked, meaning: Blocked by PayMongo's Fraud and Risk Engine, action: Do not reveal; present as a generic decline., masked: true}
+processor_errors:
+  - {code: avs_failed, meaning: Failed Address Verification Service (AVS) check, action: You may capture the auth but review for fraud.}
+  - {code: card_not_accepted, meaning: Card type not accepted by the processor, action: Contact your merchant bank about card acceptance.}
+  - {code: config_invalid_or_missing, meaning: Invalid or missing merchant configuration, action: Email support@paymongo.com.}
+  - {code: customer_blacklisted, meaning: Account matched the processor's negative file (eCheck), action: Review the order and contact the processor.}
+  - {code: merchant_configuration_invalid, meaning: Problem with CyberSource merchant configuration, action: Do not resend; contact PayMongo support.}
+  - {code: processing_error, meaning: Card processing failed for an unknown reason, action: Wait a few minutes and resend.}
+  - {code: processor_declined, meaning: Processor declined for an unknown reason, action: Use a different card or payment method.}
+  - {code: processor_timeout, meaning: Timeout at the payment processor, action: Email support@paymongo.com.}
+  - {code: system_error, meaning: Problem with the processor's system, action: Try again later.}
+  - {code: acquirer_declined, meaning: Declined by the acquiring bank, action: Use a different card or payment method.}
+  - {code: authentication_error, meaning: Payer authentication problem at the processor, action: Use a different card or payment method.}
+unknown_errors:
+  - {code: server_timeout, meaning: Server timeout while processing the request, action: Email support@paymongo.com.}
+  - {code: service_timeout, meaning: A service did not finish running in time, action: Email support@paymongo.com.}
+  - {code: unknown_error, meaning: Transaction failed for an unknown reason, action: Email support@paymongo.com.}
+invalid_card_details:
+  - {code: card_number_invalid, meaning: Card number is invalid, action: Verify the card number and try again.}
+  - {code: card_type_mismatch, meaning: Card type invalid or mismatched with the number, action: Confirm card type matches the number and resend.}
+  - {code: cvc_invalid, meaning: The CVC is invalid, action: Retry with the correct CVC or a different card.}
+  - {code: cvc_incorrect, meaning: The CVN did not match (approved by issuer, declined by CyberSource), action: You may capture the auth but review for fraud.}

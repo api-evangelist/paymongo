@@ -1,0 +1,24 @@
+generated: '2026-07-17'
+method: generated
+source: >-
+  Generated from openapi/paymongo-openapi.yml (operationIds verified against the
+  spec), conventions/paymongo-conventions.yml, errors/paymongo-decline-codes.yml,
+  and sandbox/paymongo-sandbox.yml. PayMongo publishes no first-party AGENTS.md
+  or skill files, so these are API-Evangelist-authored operating instructions.
+skills:
+  - file: paymongo-accept-card-payment.md
+    name: Accept a card payment with a Payment Intent
+    api: openapi/paymongo-openapi.yml
+    operations: [createPaymentIntent, createPaymentMethod, attachPaymentIntent, retrievePaymentIntent]
+  - file: paymongo-hosted-checkout.md
+    name: Collect payment with a hosted Checkout Session
+    api: openapi/paymongo-openapi.yml
+    operations: [createCheckoutSession, retrieveCheckoutSession, expireCheckoutSession]
+  - file: paymongo-refund-a-payment.md
+    name: Refund a payment
+    api: openapi/paymongo-openapi.yml
+    operations: [listPayments, retrievePayment, createRefund, retrieveRefund]
+  - file: paymongo-handle-webhooks.md
+    name: Register and verify webhooks
+    api: openapi/paymongo-openapi.yml
+    operations: [createWebhook, listWebhooks, retrieveWebhook, enableWebhook, disableWebhook]

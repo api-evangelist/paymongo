@@ -1,0 +1,20 @@
+generated: '2026-07-17'
+method: searched
+source: https://www.paymongo.com/changelog
+description: >-
+  PayMongo publishes a product changelog (features / improvements) at
+  paymongo.com/changelog rather than a dated, machine-versioned API changelog.
+  The REST API itself is versioned by URI path (/v1) with no dated version
+  header — backwards-incompatible changes are communicated via the docs and
+  migration guides (e.g. the legacy Sources -> Payment Intent migration). This
+  artifact records the changelog surface and the recent window; the live page is
+  the source of truth.
+docs: https://www.paymongo.com/changelog
+scheme: product-changelog (dated entries; API versioned by URI path /v1)
+current_api_version: v1
+entries:
+  - {date: '2026-03-02', title: New PayMongo Website, type: improvement, highlights: Rebuilt website — faster, more reliable, improved navigation and cross-device performance.}
+notes: >-
+  Only the most recent published entry was captured. PayMongo's changelog is
+  product-oriented; API-surface changes are documented in the reference and
+  migration guides (see lifecycle/paymongo-lifecycle.yml).

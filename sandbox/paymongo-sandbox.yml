@@ -1,0 +1,67 @@
+generated: '2026-07-17'
+method: searched
+source: https://docs.paymongo.com/docs/payment-acceptance-testing
+description: >-
+  PayMongo's sandbox / test-data surface, captured verbatim from the testing
+  docs. Test mode mirrors the live API; no real money moves. Mode is selected by
+  the API-key prefix. All values below are PayMongo's published test values.
+docs:
+  - https://docs.paymongo.com/docs/payment-acceptance-testing
+  - https://docs.paymongo.com/docs/account-settings-api-keys
+modes:
+  - name: test
+    key_prefixes: [sk_test_, pk_test_]
+    real_charges: false
+    notes: Isolated from live data; get test keys from Dashboard > Developers > API Keys.
+  - name: live
+    key_prefixes: [sk_live_, pk_live_]
+    real_charges: true
+test_cards:
+  rule: Use any future expiry date and any 3-digit CVC.
+  successful:
+    - {number: '4343434343434345', network: Visa, three_ds: none}
+    - {number: '4571736000000075', network: Visa, three_ds: none}
+    - {number: '5123000000000002', network: Mastercard, three_ds: none}
+    - {number: '4120000000000007', network: Visa, three_ds: 'required — select Authorize at prompt'}
+    - {number: '5123000000000001', network: Mastercard, three_ds: 'supported but optional'}
+  declines:
+    - {number: '4200000000000018', reason: Expired card}
+    - {number: '4300000000000017', reason: Invalid CVC}
+    - {number: '5100000000000198', reason: Insufficient funds}
+    - {number: '4111111111111111', reason: Generic decline}
+  auth_then_fail:
+    - {number: '5234000000000106', behavior: 'Authorization passes, payment fails (awaiting_payment_method); card NOT vaulted'}
+e_wallets:
+  notes: >-
+    Attach the Payment Method normally; you receive next_action.redirect.url —
+    open it and select Authorize or Fail on the PayMongo test page. No real
+    GCash / Maya / GrabPay / ShopeePay account needed.
+qr_ph:
+  notes: >-
+    Test mode generates real QR codes — do NOT scan and pay them (would process a
+    real transaction). Use the test_url in the response to simulate scenarios.
+direct_online_banking:
+  brankas:
+    banks: [BDO, Landbank, Metrobank]
+    success_otp: '123456'
+    abandonment: Close the page early to simulate EXPIRED / DENIED / CANCELLED.
+  unionbank:
+    success_otp: '111111'
+    failure_otps: ['222222', '333333', '444444', '555555', '666666']
+  bpi:
+    account: '***0001'
+    success_otp: '123456'
+    invalid_otp: '654321'
+    expired_otp: '000000'
+hold_then_capture:
+  card: Use any test card with capture_type "manual"; status becomes awaiting_capture.
+  cases:
+    - {scenario: Capture amount <= intent amount, result: succeeded}
+    - {scenario: Capture amount > intent amount, result: 'error allowed_amount_exceeded'}
+    - {scenario: '4120000000000007 select Authorize', result: awaiting_capture}
+    - {scenario: '4120000000000007 select Fail', result: 'awaiting_payment_method (no payment attached)'}
+subscriptions:
+  cases:
+    - {test_case: Successful activation, card: '4120000000000007', result: 'Authorize -> subscription active'}
+    - {test_case: Failed activation, card: '5234000000000106', result: 'Fail -> incomplete (then incomplete_cancelled after 24h)'}
+    - {test_case: Activation ok, recurring fails, card: '5123000000000001', result: 'active, then next cycle fails -> past_due -> unpaid'}

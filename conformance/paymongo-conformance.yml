@@ -1,0 +1,42 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  Derived from openapi/paymongo-openapi.yml (securitySchemes, error envelope,
+  pagination params) and searched against PayMongo docs/security claims
+  (https://www.paymongo.com/secure, https://docs.paymongo.com/docs/payment-acceptance-cards,
+  3DS/SCA references). PayMongo is a PCI DSS Level 1 Service Provider and a
+  BSP-regulated Operator of Payment System.
+standards:
+  - id: pci-dss
+    conforms: true
+    evidence: PayMongo is a certified PCI DSS Level 1 Service Provider (paymongo.com/secure).
+  - id: 3ds-sca
+    conforms: true
+    evidence: Card payments use 3D Secure 2.0 for strong customer authentication (docs.paymongo.com/docs/payment-acceptance-cards).
+  - id: http-basic-auth
+    conforms: true
+    evidence: openapi securitySchemes define basicAuth (API key as Basic-auth username).
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 securityScheme; PayMongo authenticates with API keys over HTTP Basic.
+  - id: oidc
+    conforms: false
+    evidence: No /.well-known/openid-configuration; no OIDC discovery.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a JSON:API-style `errors[]` envelope (code/detail/source), not application/problem+json.
+  - id: jsonapi-errors
+    conforms: true
+    evidence: Error responses follow the JSON:API error-object shape (errors[].code, .detail, .source.pointer/.attribute).
+  - id: cursor-pagination
+    conforms: true
+    evidence: List endpoints use limit + before/after cursors with has_more in the response body.
+  - id: qr-ph
+    conforms: true
+    evidence: Implements QR Ph, the Bangko Sentral ng Pilipinas national QR standard (docs.paymongo.com/docs/payment-acceptance-qr-ph).
+  - id: webhook-signing
+    conforms: true
+    evidence: Webhook deliveries are signed via the Paymongo-Signature header (HMAC with the endpoint signing secret).
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header/parameter is documented in the API reference at probe time.

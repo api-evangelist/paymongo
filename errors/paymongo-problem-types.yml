@@ -1,0 +1,56 @@
+generated: '2026-07-17'
+method: derived
+source: >-
+  Derived from the 4xx responses in openapi/paymongo-openapi.yml and enriched
+  from the PayMongo docs (payment-acceptance key concepts and troubleshooting).
+  PayMongo does NOT use RFC 9457 application/problem+json; it returns a
+  JSON:API-style envelope.
+format: jsonapi-errors
+envelope:
+  shape: '{ "errors": [ { "code": string, "detail": string, "sub_code": string, "source": { "pointer": string, "attribute": string } } ] }'
+  fields:
+    - code — machine-readable error category (e.g. parameter_invalid, resource_not_found)
+    - sub_code — finer-grained reason (card decline / processor codes; see errors/paymongo-decline-codes.yml)
+    - detail — human-readable message
+    - source.pointer / source.attribute — the offending request field
+http_statuses:
+  - status: 400
+    title: Bad Request
+    description: Invalid or missing parameters, or a business-rule violation on the request.
+    source_operations:
+      - 'openapi/paymongo-openapi.yml#createPaymentIntent'
+      - 'openapi/paymongo-openapi.yml#createPaymentMethod'
+      - 'openapi/paymongo-openapi.yml#createSource'
+      - 'openapi/paymongo-openapi.yml#createCheckoutSession'
+      - 'openapi/paymongo-openapi.yml#createCustomer'
+      - 'openapi/paymongo-openapi.yml#createRefund'
+      - 'openapi/paymongo-openapi.yml#createStaticQrPh'
+      - 'openapi/paymongo-openapi.yml#createWebhook'
+  - status: 401
+    title: Unauthorized
+    description: Missing or invalid API key (HTTP Basic auth). Verify the sk_/pk_ key and mode.
+    source_operations:
+      - 'openapi/paymongo-openapi.yml#createPaymentIntent'
+  - status: 404
+    title: Not Found
+    description: The referenced resource id (pi_, pm_, pay_, cus_, ...) does not exist in this mode.
+    source_operations:
+      - 'openapi/paymongo-openapi.yml#retrievePaymentIntent'
+      - 'openapi/paymongo-openapi.yml#retrievePaymentMethod'
+      - 'openapi/paymongo-openapi.yml#retrievePayment'
+      - 'openapi/paymongo-openapi.yml#retrieveSource'
+      - 'openapi/paymongo-openapi.yml#retrieveCheckoutSession'
+      - 'openapi/paymongo-openapi.yml#retrievePaymentLink'
+      - 'openapi/paymongo-openapi.yml#retrieveCustomer'
+      - 'openapi/paymongo-openapi.yml#retrieveRefund'
+      - 'openapi/paymongo-openapi.yml#retrieveWebhook'
+common_codes:
+  - {code: parameter_below_minimum, meaning: A parameter (e.g. amount) is below the allowed minimum, remediation: Increase the value above the documented minimum.}
+  - {code: parameter_above_maximum, meaning: A parameter (e.g. amount) exceeds the allowed maximum, remediation: Reduce the value below the documented maximum.}
+  - {code: parameter_invalid, meaning: A parameter value is malformed or unsupported, remediation: Correct the field named in source.attribute.}
+  - {code: resource_not_found, meaning: The referenced resource does not exist, remediation: Verify the id and the test/live mode of the key.}
+  - {code: allowed_amount_exceeded, meaning: Capture amount exceeds the authorized Payment Intent amount, remediation: Capture an amount less than or equal to the intent amount.}
+notes: >-
+  Card-payment failures additionally carry a `sub_code` describing the issuer /
+  processor decline reason — the full taxonomy is in
+  errors/paymongo-decline-codes.yml.

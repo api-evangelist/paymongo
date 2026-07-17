@@ -311,6 +311,62 @@ common:
   url: finops/paymongo-finops.yml
 - url: https://www.paymongo.com/blog
   type: Blog
+- type: DeveloperPortal
+  url: https://docs.paymongo.com/
+- type: APIReference
+  url: https://docs.paymongo.com/reference
+- type: GettingStarted
+  url: https://docs.paymongo.com/docs/payment-acceptance-quick-start
+- type: Pricing
+  url: https://www.paymongo.com/pricing
+- type: SignUp
+  url: https://dashboard.paymongo.com/signup
+- type: Login
+  url: https://dashboard.paymongo.com/login
+- type: TermsOfService
+  url: https://www.paymongo.com/terms
+- type: PrivacyPolicy
+  url: https://www.paymongo.com/privacy
+- type: StatusPage
+  url: https://status.paymongo.com
+- type: Deprecation
+  url: https://docs.paymongo.com/docs/older-workflows
+- type: Security
+  url: https://docs.paymongo.com/docs/keeping-payments-secure
+- type: Compliance
+  url: https://www.paymongo.com/secure
+- type: LLMsTxt
+  url: llms/paymongo-llms.txt
+- type: Packages
+  url: packages/paymongo-packages.yml
+- type: SDKs
+  url: packages/paymongo-packages.yml
+- type: WellKnown
+  url: well-known/paymongo-well-known.yml
+- type: MCPServer
+  url: mcp/paymongo-mcp.yml
+- type: Overlay
+  url: overlays/paymongo-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/paymongo-conformance.yml
+- type: ErrorCatalog
+  url: errors/paymongo-problem-types.yml
+- type: DeclineCodes
+  url: errors/paymongo-decline-codes.yml
+- type: Lifecycle
+  url: lifecycle/paymongo-lifecycle.yml
+- type: Conventions
+  url: conventions/paymongo-conventions.yml
+- type: Sandbox
+  url: sandbox/paymongo-sandbox.yml
+- type: DataModel
+  url: data-model/paymongo-data-model.yml
+- type: Webhooks
+  url: asyncapi/paymongo-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: ChangeLog
+  url: changelog/paymongo-changelog.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

@@ -1,0 +1,67 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.paymongo.com — cross-cutting request/response conventions that
+  apply across PayMongo endpoints, plus what openapi/paymongo-openapi.yml
+  implies. PayMongo follows a JSON:API-flavored resource envelope
+  (data.id / data.type / data.attributes).
+description: >-
+  How PayMongo's REST API behaves across every operation: authentication,
+  resource envelope, amounts/currency, pagination, metadata, webhook delivery,
+  versioning, error envelope, and idempotency posture.
+base_url: https://api.paymongo.com/v1
+api_style: REST over HTTPS; JSON request/response with a JSON:API-style data envelope.
+
+authentication:
+  scheme: HTTP Basic (API key as the Basic-auth username, blank password)
+  key_types:
+    - secret (sk_test_ / sk_live_) — server-side calls
+    - public (pk_test_ / pk_live_) — client-side Payment Method / token creation only
+  mode_selection: Test vs live is chosen by the key prefix (test_ vs live_).
+  docs: https://docs.paymongo.com/reference/authentication-1
+  detail: authentication/paymongo-authentication.yml
+
+resource_envelope:
+  request: '{ "data": { "attributes": { ... } } }'
+  response: '{ "data": { "id": "pi_...", "type": "payment_intent", "attributes": { ... } } }'
+  id_prefixes: See data-model/paymongo-data-model.yml (pi_, pm_, pay_, cs_, link_, cus_, re_, wh_, src_, sub_, plan_).
+
+amounts:
+  unit: centavos (integer; 1 PHP = 100)
+  currency: PHP is the settlement currency; card intents may optionally switch to USD.
+  example: PHP 100.00 is sent as 10000.
+
+idempotency:
+  supported: false
+  notes: >-
+    PayMongo does not document an Idempotency-Key header or parameter in its API
+    reference at capture time. Safe retries rely on the Payment Intent lifecycle
+    (an intent transitions through statuses rather than being re-created).
+
+pagination:
+  style: cursor
+  params: {limit: integer (default 10, max 100), before: resource id, after: resource id}
+  response_fields: [has_more]
+  applies_to: [listPayments, listRefunds, listCustomers, listWebhooks]
+
+metadata:
+  supported: true
+  shape: A free-form `metadata` object (key/value) on Payment Intents, Payment Methods, and other resources.
+
+versioning:
+  scheme: uri-path (/v1)
+  detail: lifecycle/paymongo-lifecycle.yml
+
+webhooks:
+  delivery: Signed HTTP POST callbacks (not a stream).
+  signature_header: Paymongo-Signature
+  verification: HMAC using the endpoint's webhook signing secret.
+  catalog: asyncapi/paymongo-webhooks.yml
+
+error_envelope:
+  shape: '{ "errors": [ { "code", "sub_code", "detail", "source": { "pointer", "attribute" } } ] }'
+  detail: errors/paymongo-problem-types.yml
+  card_declines: errors/paymongo-decline-codes.yml
+
+rate_limits:
+  detail: rate-limits/paymongo-rate-limits.yml

@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: searched
+source: live probes of the PayMongo API, docs, and website hosts
+description: >-
+  Probe of the /.well-known/ discovery surface across PayMongo's API host
+  (api.paymongo.com), docs host (docs.paymongo.com), and marketing host
+  (www.paymongo.com). No well-known discovery documents are published. The API
+  host returns HTTP 401 (Basic auth wall) for every path including /.well-known/*,
+  so those are not published documents; the docs and www hosts return 404.
+  Absence is valid, recorded data.
+hosts:
+  - host: https://api.paymongo.com
+    documents:
+      - {path: /.well-known/security.txt, status: 401, file: null, note: auth wall, not a published document}
+      - {path: /.well-known/openid-configuration, status: 401, file: null, note: auth wall}
+      - {path: /.well-known/oauth-authorization-server, status: 401, file: null, note: auth wall}
+      - {path: /.well-known/api-catalog, status: 401, file: null, note: auth wall}
+      - {path: /.well-known/ai-plugin.json, status: 401, file: null, note: auth wall}
+  - host: https://docs.paymongo.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+  - host: https://www.paymongo.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+notes: >-
+  No security.txt (RFC 9116), OIDC/OAuth discovery, API catalog, or ai-plugin
+  manifest is published. PayMongo authenticates with HTTP Basic (API keys), so
+  there is no OIDC/OAuth discovery surface to expose. A docs-level llms.txt IS
+  published (see llms/paymongo-llms.txt).

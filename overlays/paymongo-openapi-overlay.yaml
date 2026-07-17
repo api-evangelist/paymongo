@@ -1,0 +1,33 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for PayMongo API
+  version: 1.0.0
+# Provenance: generated 2026-07-17 by the API Evangelist enrichment pipeline.
+# Captures OUR enhancements as an Overlay; never mutates the harvested openapi file.
+extends: openapi/paymongo-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-17'
+      x-apievangelist-artifacts:
+        conventions: conventions/paymongo-conventions.yml
+        errors: errors/paymongo-problem-types.yml
+        decline_codes: errors/paymongo-decline-codes.yml
+        sandbox: sandbox/paymongo-sandbox.yml
+        webhooks: asyncapi/paymongo-webhooks.yml
+        data_model: data-model/paymongo-data-model.yml
+        lifecycle: lifecycle/paymongo-lifecycle.yml
+        authentication: authentication/paymongo-authentication.yml
+  - target: $.info
+    update:
+      x-payment-domain:
+        currency: PHP
+        amount_unit: centavos (integer; 1 PHP = 100)
+        pci_dss: Level 1 Service Provider
+        regulator: Bangko Sentral ng Pilipinas (BSP)
+  - target: $.components.securitySchemes.basicAuth
+    update:
+      x-key-prefixes:
+        secret: [sk_test_, sk_live_]
+        public: [pk_test_, pk_live_]
+      x-test-live-separation: Mode is selected by API key prefix (test_ vs live_).

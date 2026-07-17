@@ -1,0 +1,33 @@
+generated: '2026-07-17'
+method: searched
+source: >-
+  https://docs.paymongo.com (API reference base path), https://www.paymongo.com/changelog,
+  https://status.paymongo.com, and the legacy-workflow docs. Deprecated surface
+  derived from apis.yml (Sources workflow) and PayMongo's own migration guidance.
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.paymongo.com/v1
+  docs: https://docs.paymongo.com/
+  notes: >-
+    PayMongo pins the API version in the URL path (/v1). Mode (test vs live) is
+    selected by the API-key prefix, not by a version header. No Stripe-style
+    dated version header is used.
+deprecation:
+  policy_url: https://docs.paymongo.com/docs/older-workflows
+  sunset_header: false
+  deprecated_surfaces:
+    - name: Sources workflow (GCash / GrabPay redirect)
+      status: legacy
+      guidance: PayMongo recommends migrating to the Payment Intent / Payment Method workflow.
+      docs: https://docs.paymongo.com/docs/older-workflows
+  notes: >-
+    PayMongo has no published RFC 8594 Sunset/Deprecation header policy. The
+    legacy Sources workflow is documented as superseded by Payment Intents but
+    remains available for existing integrations.
+status_page: https://status.paymongo.com
+sla:
+  url: null
+  public_uptime_target: null
+  notes: No public uptime SLA target is published; status is tracked at status.paymongo.com.
+deprecated_operations: []

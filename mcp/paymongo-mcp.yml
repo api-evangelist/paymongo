@@ -1,0 +1,45 @@
+generated: '2026-07-17'
+method: derived
+status: candidate
+source: openapi/paymongo-openapi.yml
+description: >-
+  PayMongo does not operate an official hosted or local MCP server at probe time
+  (no server documented on docs.paymongo.com; nothing in the paymongo GitHub org
+  or the MCP registries). This is a DERIVED candidate tool list — one tool per
+  OpenAPI operationId — a governance starting point for exposing PayMongo to
+  agents, not a published PayMongo server. Money-moving tools (attach, refund)
+  should be gated with human-in-the-loop per agentic-access/paymongo-agentic-access.yml.
+server:
+  name: paymongo
+  transport: stdio
+  url: null
+  auth: http-basic (API key as username)
+tools:
+  - {name: create_payment_intent, description: Create a Payment Intent, source_operation: 'openapi/paymongo-openapi.yml#createPaymentIntent'}
+  - {name: retrieve_payment_intent, description: Retrieve a Payment Intent, source_operation: 'openapi/paymongo-openapi.yml#retrievePaymentIntent'}
+  - {name: attach_payment_intent, description: Attach a Payment Method to a Payment Intent and confirm (moves money), source_operation: 'openapi/paymongo-openapi.yml#attachPaymentIntent'}
+  - {name: create_payment_method, description: Create a Payment Method, source_operation: 'openapi/paymongo-openapi.yml#createPaymentMethod'}
+  - {name: retrieve_payment_method, description: Retrieve a Payment Method, source_operation: 'openapi/paymongo-openapi.yml#retrievePaymentMethod'}
+  - {name: list_payments, description: List Payments, source_operation: 'openapi/paymongo-openapi.yml#listPayments'}
+  - {name: retrieve_payment, description: Retrieve a Payment, source_operation: 'openapi/paymongo-openapi.yml#retrievePayment'}
+  - {name: create_source, description: Create a legacy Source, source_operation: 'openapi/paymongo-openapi.yml#createSource'}
+  - {name: retrieve_source, description: Retrieve a Source, source_operation: 'openapi/paymongo-openapi.yml#retrieveSource'}
+  - {name: create_checkout_session, description: Create a hosted Checkout Session, source_operation: 'openapi/paymongo-openapi.yml#createCheckoutSession'}
+  - {name: retrieve_checkout_session, description: Retrieve a Checkout Session, source_operation: 'openapi/paymongo-openapi.yml#retrieveCheckoutSession'}
+  - {name: expire_checkout_session, description: Expire a Checkout Session, source_operation: 'openapi/paymongo-openapi.yml#expireCheckoutSession'}
+  - {name: create_payment_link, description: Create a Payment Link, source_operation: 'openapi/paymongo-openapi.yml#createPaymentLink'}
+  - {name: retrieve_payment_link, description: Retrieve a Payment Link, source_operation: 'openapi/paymongo-openapi.yml#retrievePaymentLink'}
+  - {name: create_customer, description: Create a Customer, source_operation: 'openapi/paymongo-openapi.yml#createCustomer'}
+  - {name: list_customers, description: List Customers, source_operation: 'openapi/paymongo-openapi.yml#listCustomers'}
+  - {name: retrieve_customer, description: Retrieve a Customer, source_operation: 'openapi/paymongo-openapi.yml#retrieveCustomer'}
+  - {name: update_customer, description: Update a Customer, source_operation: 'openapi/paymongo-openapi.yml#updateCustomer'}
+  - {name: delete_customer, description: Delete a Customer, source_operation: 'openapi/paymongo-openapi.yml#deleteCustomer'}
+  - {name: create_refund, description: Issue a Refund (reverses money), source_operation: 'openapi/paymongo-openapi.yml#createRefund'}
+  - {name: list_refunds, description: List Refunds, source_operation: 'openapi/paymongo-openapi.yml#listRefunds'}
+  - {name: retrieve_refund, description: Retrieve a Refund, source_operation: 'openapi/paymongo-openapi.yml#retrieveRefund'}
+  - {name: create_static_qrph, description: Generate a static QR Ph code, source_operation: 'openapi/paymongo-openapi.yml#createStaticQrPh'}
+  - {name: create_webhook, description: Register a webhook endpoint, source_operation: 'openapi/paymongo-openapi.yml#createWebhook'}
+  - {name: list_webhooks, description: List webhook endpoints, source_operation: 'openapi/paymongo-openapi.yml#listWebhooks'}
+  - {name: retrieve_webhook, description: Retrieve a webhook endpoint, source_operation: 'openapi/paymongo-openapi.yml#retrieveWebhook'}
+  - {name: enable_webhook, description: Enable a webhook endpoint, source_operation: 'openapi/paymongo-openapi.yml#enableWebhook'}
+  - {name: disable_webhook, description: Disable a webhook endpoint, source_operation: 'openapi/paymongo-openapi.yml#disableWebhook'}
