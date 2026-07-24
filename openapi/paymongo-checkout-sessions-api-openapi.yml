@@ -1,0 +1,172 @@
+openapi: 3.0.3
+info:
+  title: PayMongo Checkout Sessions API
+  description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
+  version: '2020-08-08'
+  termsOfService: https://www.paymongo.com/terms
+  contact:
+    name: PayMongo Developer Support
+    email: support@paymongo.com
+    url: https://docs.paymongo.com
+servers:
+- url: https://api.paymongo.com/v1
+  description: Production (live and test mode selected by API key prefix)
+security:
+- basicAuth: []
+tags:
+- name: Checkout Sessions
+paths:
+  /checkout_sessions:
+    post:
+      operationId: createCheckoutSession
+      tags:
+      - Checkout Sessions
+      summary: Create a Checkout Session (Hosted Checkout)
+      description: Creates a PayMongo-hosted checkout page. Returns checkout_url to which the customer is redirected.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSessionCreate'
+      responses:
+        '200':
+          description: Checkout Session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400':
+          $ref: '#/components/responses/Error'
+  /checkout_sessions/{id}:
+    get:
+      operationId: retrieveCheckoutSession
+      tags:
+      - Checkout Sessions
+      summary: Retrieve a Checkout Session
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Checkout Session
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404':
+          $ref: '#/components/responses/Error'
+  /checkout_sessions/{id}/expire:
+    post:
+      operationId: expireCheckoutSession
+      tags:
+      - Checkout Sessions
+      summary: Expire a Checkout Session
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Checkout Session expired
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+components:
+  schemas:
+    CheckoutSessionCreate:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required:
+              - line_items
+              - payment_method_types
+              properties:
+                line_items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      quantity:
+                        type: integer
+                      amount:
+                        type: integer
+                      currency:
+                        type: string
+                        example: PHP
+                payment_method_types:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - card
+                    - gcash
+                    - grab_pay
+                    - paymaya
+                    - billease
+                    - dob
+                    - qrph
+                success_url:
+                  type: string
+                cancel_url:
+                  type: string
+                description:
+                  type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
+    GenericResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              type: object
+              additionalProperties: true
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic-auth username (secret key sk_test_* / sk_live_* for server-side calls; for calls that accept the public key pk_test_* / pk_live_*, the public key goes in the username field). The password field is left blank unless a call requires both keys.

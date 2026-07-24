@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: PayMongo Checkout Sessions Payments API
+  description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
+  version: '2020-08-08'
+  termsOfService: https://www.paymongo.com/terms
+  contact:
+    name: PayMongo Developer Support
+    email: support@paymongo.com
+    url: https://docs.paymongo.com
+servers:
+- url: https://api.paymongo.com/v1
+  description: Production (live and test mode selected by API key prefix)
+security:
+- basicAuth: []
+tags:
+- name: Payments
+paths:
+  /payments:
+    get:
+      operationId: listPayments
+      tags:
+      - Payments
+      summary: List all Payments
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+          maximum: 100
+      - name: before
+        in: query
+        schema:
+          type: string
+      - name: after
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of Payment resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentList'
+  /payments/{id}:
+    get:
+      operationId: retrievePayment
+      tags:
+      - Payments
+      summary: Retrieve a Payment
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Payment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResource'
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
+    PaymentResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: pay_xxx
+            type:
+              type: string
+              example: payment
+            attributes:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                currency:
+                  type: string
+                fee:
+                  type: integer
+                net_amount:
+                  type: integer
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - paid
+                  - failed
+                source:
+                  type: object
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResource'
+        has_more:
+          type: boolean
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic-auth username (secret key sk_test_* / sk_live_* for server-side calls; for calls that accept the public key pk_test_* / pk_live_*, the public key goes in the username field). The password field is left blank unless a call requires both keys.

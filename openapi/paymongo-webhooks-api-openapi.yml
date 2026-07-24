@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: PayMongo Checkout Sessions Webhooks API
+  description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
+  version: '2020-08-08'
+  termsOfService: https://www.paymongo.com/terms
+  contact:
+    name: PayMongo Developer Support
+    email: support@paymongo.com
+    url: https://docs.paymongo.com
+servers:
+- url: https://api.paymongo.com/v1
+  description: Production (live and test mode selected by API key prefix)
+security:
+- basicAuth: []
+tags:
+- name: Webhooks
+paths:
+  /webhooks:
+    post:
+      operationId: createWebhook
+      tags:
+      - Webhooks
+      summary: Create a Webhook
+      description: Registers a webhook endpoint subscribed to event types. Deliveries are signed HTTP POST callbacks (Paymongo-Signature header) - not a WebSocket. Each webhook has a signing secret used to verify payloads.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '200':
+          description: Webhook created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '400':
+          $ref: '#/components/responses/Error'
+    get:
+      operationId: listWebhooks
+      tags:
+      - Webhooks
+      summary: List Webhooks
+      responses:
+        '200':
+          description: A list of Webhooks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericList'
+  /webhooks/{id}:
+    get:
+      operationId: retrieveWebhook
+      tags:
+      - Webhooks
+      summary: Retrieve a Webhook
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Webhook
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+        '404':
+          $ref: '#/components/responses/Error'
+  /webhooks/{id}/enable:
+    post:
+      operationId: enableWebhook
+      tags:
+      - Webhooks
+      summary: Enable a Webhook
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Webhook enabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+  /webhooks/{id}/disable:
+    post:
+      operationId: disableWebhook
+      tags:
+      - Webhooks
+      summary: Disable a Webhook
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Webhook disabled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResource'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
+    GenericList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericResource'
+        has_more:
+          type: boolean
+    GenericResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              type: object
+              additionalProperties: true
+    WebhookCreate:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required:
+              - url
+              - events
+              properties:
+                url:
+                  type: string
+                events:
+                  type: array
+                  items:
+                    type: string
+                    example: payment.paid
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic-auth username (secret key sk_test_* / sk_live_* for server-side calls; for calls that accept the public key pk_test_* / pk_live_*, the public key goes in the username field). The password field is left blank unless a call requires both keys.

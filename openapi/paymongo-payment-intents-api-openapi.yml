@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: PayMongo Checkout Sessions Payment Intents API
+  description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
+  version: '2020-08-08'
+  termsOfService: https://www.paymongo.com/terms
+  contact:
+    name: PayMongo Developer Support
+    email: support@paymongo.com
+    url: https://docs.paymongo.com
+servers:
+- url: https://api.paymongo.com/v1
+  description: Production (live and test mode selected by API key prefix)
+security:
+- basicAuth: []
+tags:
+- name: Payment Intents
+paths:
+  /payment_intents:
+    post:
+      operationId: createPaymentIntent
+      tags:
+      - Payment Intents
+      summary: Create a Payment Intent
+      description: Creates a Payment Intent that tracks the lifecycle of a payment. Uses the secret API key. Amount is an integer in centavos (minimum 2000 = PHP 20.00 for most methods).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentIntentCreate'
+      responses:
+        '200':
+          description: Payment Intent created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntentResource'
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+  /payment_intents/{id}:
+    get:
+      operationId: retrievePaymentIntent
+      tags:
+      - Payment Intents
+      summary: Retrieve a Payment Intent
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      - name: client_key
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Client key allowing retrieval with the public key (client-side).
+      responses:
+        '200':
+          description: Payment Intent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntentResource'
+        '404':
+          $ref: '#/components/responses/Error'
+  /payment_intents/{id}/attach:
+    post:
+      operationId: attachPaymentIntent
+      tags:
+      - Payment Intents
+      summary: Attach a Payment Method to a Payment Intent
+      description: Attaches a Payment Method to a Payment Intent to attempt the payment. For redirect-based methods (GCash, GrabPay, Maya) the response contains a next_action.redirect.url the customer must be sent to.
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentIntentAttach'
+      responses:
+        '200':
+          description: Payment Intent after attach
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentIntentResource'
+        '400':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
+    PaymentIntentAttach:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required:
+              - payment_method
+              properties:
+                payment_method:
+                  type: string
+                  description: The Payment Method id (pm_...) to attach.
+                client_key:
+                  type: string
+                return_url:
+                  type: string
+                  description: URL the customer is redirected to after off-site authorization.
+    PaymentIntentResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: pi_xxx
+            type:
+              type: string
+              example: payment_intent
+            attributes:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                currency:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - awaiting_payment_method
+                  - awaiting_next_action
+                  - processing
+                  - succeeded
+                  - cancelled
+                client_key:
+                  type: string
+                next_action:
+                  type: object
+                  nullable: true
+                  properties:
+                    type:
+                      type: string
+                      example: redirect
+                    redirect:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                        return_url:
+                          type: string
+    PaymentIntentCreate:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required:
+              - amount
+              - payment_method_allowed
+              - currency
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in centavos (integer). Minimum typically 2000 (PHP 20.00).
+                  example: 10000
+                currency:
+                  type: string
+                  description: Three-letter ISO currency code, uppercase. PHP is the default and only settlement currency (card intents may be switched to USD).
+                  example: PHP
+                payment_method_allowed:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - card
+                    - gcash
+                    - grab_pay
+                    - paymaya
+                    - billease
+                    - dob
+                    - qrph
+                  example:
+                  - card
+                  - gcash
+                  - grab_pay
+                  - paymaya
+                capture_type:
+                  type: string
+                  enum:
+                  - automatic
+                  - manual
+                  default: automatic
+                description:
+                  type: string
+                statement_descriptor:
+                  type: string
+                metadata:
+                  type: object
+                  additionalProperties: true
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic-auth username (secret key sk_test_* / sk_live_* for server-side calls; for calls that accept the public key pk_test_* / pk_live_*, the public key goes in the username field). The password field is left blank unless a call requires both keys.

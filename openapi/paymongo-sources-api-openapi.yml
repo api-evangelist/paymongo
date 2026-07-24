@@ -1,0 +1,173 @@
+openapi: 3.0.3
+info:
+  title: PayMongo Checkout Sessions Sources API
+  description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
+  version: '2020-08-08'
+  termsOfService: https://www.paymongo.com/terms
+  contact:
+    name: PayMongo Developer Support
+    email: support@paymongo.com
+    url: https://docs.paymongo.com
+servers:
+- url: https://api.paymongo.com/v1
+  description: Production (live and test mode selected by API key prefix)
+security:
+- basicAuth: []
+tags:
+- name: Sources
+paths:
+  /sources:
+    post:
+      operationId: createSource
+      tags:
+      - Sources
+      summary: Create a Source (legacy GCash / GrabPay workflow)
+      description: Legacy Sources workflow for GCash and GrabPay. Generates a redirect checkout_url the customer authorizes. PayMongo recommends migrating to the Payment Intent workflow.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceCreate'
+      responses:
+        '200':
+          description: Source created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceResource'
+        '400':
+          $ref: '#/components/responses/Error'
+  /sources/{id}:
+    get:
+      operationId: retrieveSource
+      tags:
+      - Sources
+      summary: Retrieve a Source
+      parameters:
+      - $ref: '#/components/parameters/ResourceId'
+      responses:
+        '200':
+          description: Source
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceResource'
+        '404':
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
+    SourceCreate:
+      type: object
+      required:
+      - data
+      properties:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required:
+              - amount
+              - currency
+              - type
+              - redirect
+              properties:
+                amount:
+                  type: integer
+                  description: Amount in centavos.
+                currency:
+                  type: string
+                  example: PHP
+                type:
+                  type: string
+                  enum:
+                  - gcash
+                  - grab_pay
+                redirect:
+                  type: object
+                  required:
+                  - success
+                  - failed
+                  properties:
+                    success:
+                      type: string
+                    failed:
+                      type: string
+    SourceResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: src_xxx
+            type:
+              type: string
+              example: source
+            attributes:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                currency:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                  - pending
+                  - chargeable
+                  - cancelled
+                  - expired
+                  - paid
+                type:
+                  type: string
+                redirect:
+                  type: object
+                  properties:
+                    checkout_url:
+                      type: string
+                    success:
+                      type: string
+                    failed:
+                      type: string
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication. Provide your API key as the Basic-auth username (secret key sk_test_* / sk_live_* for server-side calls; for calls that accept the public key pk_test_* / pk_live_*, the public key goes in the username field). The password field is left blank unless a call requires both keys.
