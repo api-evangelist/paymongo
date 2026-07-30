@@ -9,7 +9,20 @@ description: PayMongo is a Philippine payments platform that lets businesses acc
   Payment Links, Customers, Refunds, Subscriptions, and signed Webhooks. Amounts
   are integers in centavos and PHP is the settlement currency; PayMongo is a
   PCI DSS Level 1 Service Provider.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paymongo.png
 tags:
 - Payments
 - FinTech
@@ -22,269 +35,589 @@ created: '2026-07-17'
 modified: '2026-07-17'
 specificationVersion: '0.19'
 apis:
-- aid: paymongo:paymongo-payment-intents-api
-  name: PayMongo Payment Intents API
-  tags:
-  - Payment Intents
-  - Payments
-  - Checkout
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/docs/payment-acceptance-introduction
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/create-a-paymentintent
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Core payment-acceptance workflow. Create a Payment Intent, attach a
-    Payment Method, and confirm the payment across cards, GCash, Maya, GrabPay,
-    QR Ph, BillEase, and direct online banking, with manual or automatic capture.
-- aid: paymongo:paymongo-payment-methods-api
-  name: PayMongo Payment Methods API
-  tags:
-  - Payment Methods
-  - Cards
-  - E-Wallet
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/the-payment-method-object
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/reference/create-a-paymentmethod
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Creates and retrieves Payment Method resources describing how the
-    customer pays (card, gcash, grab_pay, paymaya, billease, dob, qrph). May be
-    created with the public or secret API key.
-- aid: paymongo:paymongo-payments-api
-  name: PayMongo Payments API
-  tags:
-  - Payments
-  - Transactions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/list-all-payments
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/reference/list-all-payments
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Lists and retrieves completed Payment resources with amount, fee,
-    net_amount, and status for reconciliation.
-- aid: paymongo:paymongo-sources-api
-  name: PayMongo Sources API
-  tags:
-  - Sources
-  - GCash
-  - GrabPay
-  - Legacy
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/docs/older-workflows
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/docs/older-workflows
-    type: Documentation
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Legacy Sources workflow for GCash and GrabPay redirect payments.
-    PayMongo recommends migrating to the Payment Intent workflow; documented here
-    for existing integrations.
 - aid: paymongo:paymongo-checkout-sessions-api
   name: PayMongo Checkout Sessions API
-  tags:
-  - Hosted Checkout
-  - Checkout
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/checkout-session-resource
+  description: The Checkout Sessions API from PayMongo — 3 operation(s) for checkout sessions.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
   baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/create_checkout_sessions
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Creates a PayMongo-hosted checkout page from your backend, returning
-    a checkout_url to redirect the customer to. Sessions can be retrieved and expired.
-- aid: paymongo:paymongo-payment-links-api
-  name: PayMongo Payment Links API
   tags:
-  - Payment Links
-  - No Code
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/payment-links
-  baseURL: https://api.paymongo.com/v1
+  - Checkout Sessions
   properties:
-  - url: https://docs.paymongo.com/docs/payment-channels-payment-links
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/post_v1-payment-links
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Creates, lists, updates, and refunds shareable Payment Links that
-    collect a fixed or open amount without building a checkout UI.
+  - type: OpenAPI
+    url: openapi/paymongo-checkout-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
 - aid: paymongo:paymongo-customers-api
   name: PayMongo Customers API
+  description: The Customers API from PayMongo — 2 operation(s) for customers.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
   tags:
   - Customers
-  - Vaulting
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/retrieve-customer
-  baseURL: https://api.paymongo.com/v1
   properties:
-  - url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/retrieve-customer
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Manages Customer objects and their vaulted payment methods for
-    repeat purchases and card-on-file flows.
-- aid: paymongo:paymongo-refunds-api
-  name: PayMongo Refunds API
+  - type: OpenAPI
+    url: openapi/paymongo-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
+- aid: paymongo:paymongo-payment-intents-api
+  name: PayMongo Payment Intents API
+  description: The Payment Intents API from PayMongo — 3 operation(s) for payment intents.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
   tags:
-  - Refunds
-  - Disputes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/docs/payment-acceptance-refunds
-  baseURL: https://api.paymongo.com/v1
+  - Payment Intents
   properties:
-  - url: https://docs.paymongo.com/docs/payment-acceptance-refunds
-    type: Documentation
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Issues full or partial refunds against a Payment, with reason codes
-    (duplicate, fraudulent, requested_by_customer, others).
+  - type: OpenAPI
+    url: openapi/paymongo-payment-intents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
+- aid: paymongo:paymongo-payment-links-api
+  name: PayMongo Payment Links API
+  description: The Payment Links API from PayMongo — 2 operation(s) for payment links.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
+  tags:
+  - Payment Links
+  properties:
+  - type: OpenAPI
+    url: openapi/paymongo-payment-links-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
+- aid: paymongo:paymongo-payment-methods-api
+  name: PayMongo Payment Methods API
+  description: The Payment Methods API from PayMongo — 2 operation(s) for payment methods.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
+  tags:
+  - Payment Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/paymongo-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
+- aid: paymongo:paymongo-payments-api
+  name: PayMongo Payments API
+  description: The Payments API from PayMongo — 2 operation(s) for payments.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/paymongo-payments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
 - aid: paymongo:paymongo-qr-ph-api
   name: PayMongo QR Ph API
+  description: The QR Ph API from PayMongo — 1 operation(s) for qr ph.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
   tags:
   - QR Ph
-  - QR Code
-  - In Store
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/docs/payment-acceptance-qr-ph-api
-  baseURL: https://api.paymongo.com/v1
   properties:
-  - url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/generate-mpm-qr
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Generates dynamic (API-driven) and static (in-store) QR Ph codes -
-    the Philippine national QR standard - and confirms payment via webhook or polling.
+  - type: OpenAPI
+    url: openapi/paymongo-qr-ph-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
+- aid: paymongo:paymongo-refunds-api
+  name: PayMongo Refunds API
+  description: The Refunds API from PayMongo — 2 operation(s) for refunds.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
+  tags:
+  - Refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/paymongo-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
+- aid: paymongo:paymongo-sources-api
+  name: PayMongo Sources API
+  description: The Sources API from PayMongo — 2 operation(s) for sources.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/paymongo-sources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
 - aid: paymongo:paymongo-webhooks-api
   name: PayMongo Webhooks API
+  description: The Webhooks API from PayMongo — 4 operation(s) for webhooks.
+  humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
+  baseURL: https://api.paymongo.com/v1
   tags:
   - Webhooks
-  - Events
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/docs/developer-tools-webhooks
-  baseURL: https://api.paymongo.com/v1
   properties:
-  - url: https://docs.paymongo.com/docs/developer-tools-webhooks
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/create-a-webhook
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  - url: collections/paymongo.postman_collection.json
-    type: PostmanCollection
-  description: Registers, lists, enables, and disables webhook endpoints. Deliveries
-    are signed HTTP POST callbacks (Paymongo-Signature header) for events such as
-    payment.paid, payment.failed, and source.chargeable - not a WebSocket stream.
-- aid: paymongo:paymongo-subscriptions-api
-  name: PayMongo Subscriptions & Plans API
-  tags:
-  - Subscriptions
-  - Recurring
-  - Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/subscription-resource
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/create-a-subscription
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  description: Creates Plans and Subscriptions for recurring billing, including
-    invoices, on-demand payments, and test-cycle triggers.
-- aid: paymongo:paymongo-money-movement-api
-  name: PayMongo Money Movement API
-  tags:
-  - Wallets
-  - Transfers
-  - Payouts
-  - Disbursements
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/docs/money-movement-introduction
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/transfer-resource
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  description: Wallets, Transfers, Batch Transfers, and Payouts to move funds out
-    to banks and e-wallets via InstaPay and PESONet, with reconciliation endpoints.
-- aid: paymongo:paymongo-forex-api
-  name: PayMongo Forex API
-  tags:
-  - Forex
-  - Currency
-  - Quotes
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/docs/money-movement-forex
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/docs/money-movement-forex
-    type: Documentation
-  - url: https://docs.paymongo.com/reference/quote-resource
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  description: Locks in a price for converting between the Philippine Peso and
-    supported foreign currencies via Rates and Quotes, settled across the platform.
-- aid: paymongo:paymongo-fraud-detection-api
-  name: PayMongo Fraud Detection API
-  tags:
-  - Fraud
-  - Risk
-  - Protect
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.paymongo.com/reference/fraud-detection-overview
-  baseURL: https://api.paymongo.com/v1
-  properties:
-  - url: https://docs.paymongo.com/reference/fraud-detection-overview
-    type: APIReference
-  - url: openapi/paymongo-openapi.yml
-    type: OpenAPI
-  description: PayMongo Protect - Reviews, Rules, Rule Attributes, and Scores for
-    per-transaction risk scoring and manual review workflows.
+  - type: OpenAPI
+    url: openapi/paymongo-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-introduction
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentintent
+  - type: PostmanCollection
+    url: collections/paymongo.postman_collection.json
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-paymentmethod
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/list-all-payments
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/older-workflows
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-hosted-checkout
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create_checkout_sessions
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-channels-payment-links
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/post_v1-payment-links
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-card-vaulting
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/retrieve-customer
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-refunds
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-qr-ph
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/generate-mpm-qr
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/developer-tools-webhooks
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-webhook
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/payment-acceptance-subscriptions
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/create-a-subscription
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-moving-money-with-api
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/transfer-resource
+  - type: Documentation
+    url: https://docs.paymongo.com/docs/money-movement-forex
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/quote-resource
+  - type: APIReference
+    url: https://docs.paymongo.com/reference/fraud-detection-overview
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/paymongo/overview
 - type: AgenticAccess
   url: agentic-access/paymongo-agentic-access.yml
 - type: TrustCenter
