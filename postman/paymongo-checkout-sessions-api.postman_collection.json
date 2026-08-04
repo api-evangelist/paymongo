@@ -1,0 +1,443 @@
+{
+  "info": {
+    "_postman_id": "b933e59d-2637-4cf8-a974-157e841a87b3",
+    "name": "PayMongo Checkout Sessions API",
+    "description": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:47.000Z",
+    "updatedAt": "2026-07-28T02:32:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b933e59d-2637-4cf8-a974-157e841a87b3"
+  },
+  "item": [
+    {
+      "name": "checkout_sessions",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "expire",
+              "item": [
+                {
+                  "name": "Expire a Checkout Session",
+                  "id": "18a2f425-8327-435f-850e-369b49bc7db9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/checkout_sessions/:id/expire",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "checkout_sessions",
+                        ":id",
+                        "expire"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a3ca82bd-c7bc-46cc-9200-16dc42b93e6e",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e4f34a90-e69e-47a9-a994-42941548d72b",
+                      "name": "Checkout Session expired",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/checkout_sessions/:id/expire",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "checkout_sessions",
+                            ":id",
+                            "expire"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"labore4\": 74348896,\n      \"quib40\": 40769895\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:47.000Z",
+                      "updatedAt": "2026-07-28T02:32:47.000Z",
+                      "uid": "35240-e4f34a90-e69e-47a9-a994-42941548d72b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:47.000Z",
+                  "updatedAt": "2026-07-28T02:32:47.000Z",
+                  "uid": "35240-18a2f425-8327-435f-850e-369b49bc7db9"
+                }
+              ],
+              "id": "8bafb95b-1ba5-496f-9951-60c39bd25280",
+              "createdAt": "2026-07-28T02:32:47.000Z",
+              "updatedAt": "2026-07-28T02:32:47.000Z",
+              "uid": "35240-8bafb95b-1ba5-496f-9951-60c39bd25280"
+            },
+            {
+              "name": "Retrieve a Checkout Session",
+              "id": "f82c9130-4f29-4f16-a94c-a109312943a5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/checkout_sessions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "checkout_sessions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d9bbd3b6-93f4-4b8b-96b3-084d168873b6",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9693885c-a751-412f-b96e-6b03ac18f602",
+                  "name": "Checkout Session",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/checkout_sessions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "checkout_sessions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"labore4\": 74348896,\n      \"quib40\": 40769895\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:47.000Z",
+                  "updatedAt": "2026-07-28T02:32:47.000Z",
+                  "uid": "35240-9693885c-a751-412f-b96e-6b03ac18f602"
+                },
+                {
+                  "id": "5cdcf461-deae-4e9e-84cb-19cca25bb704",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/checkout_sessions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "checkout_sessions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:32:47.000Z",
+                  "updatedAt": "2026-07-28T02:32:47.000Z",
+                  "uid": "35240-5cdcf461-deae-4e9e-84cb-19cca25bb704"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:47.000Z",
+              "updatedAt": "2026-07-28T02:32:47.000Z",
+              "uid": "35240-f82c9130-4f29-4f16-a94c-a109312943a5"
+            }
+          ],
+          "id": "a536bbfb-6836-451c-9688-c81fad87cf4d",
+          "createdAt": "2026-07-28T02:32:47.000Z",
+          "updatedAt": "2026-07-28T02:32:47.000Z",
+          "uid": "35240-a536bbfb-6836-451c-9688-c81fad87cf4d"
+        },
+        {
+          "name": "Create a Checkout Session (Hosted Checkout)",
+          "id": "1c906c0c-cc6e-4c89-9f57-8690cb80e7ee",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"line_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        }\n      ],\n      \"payment_method_types\": [\n        \"qrph\",\n        \"billease\"\n      ],\n      \"success_url\": \"<string>\",\n      \"cancel_url\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/checkout_sessions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "checkout_sessions"
+              ]
+            },
+            "description": "Creates a PayMongo-hosted checkout page. Returns checkout_url to which the customer is redirected."
+          },
+          "response": [
+            {
+              "id": "73dfac5c-a14b-487a-b73a-ecf84de80460",
+              "name": "Checkout Session created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"line_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        }\n      ],\n      \"payment_method_types\": [\n        \"qrph\",\n        \"billease\"\n      ],\n      \"success_url\": \"<string>\",\n      \"cancel_url\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/checkout_sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "checkout_sessions"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"labore4\": 74348896,\n      \"quib40\": 40769895\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:32:47.000Z",
+              "updatedAt": "2026-07-28T02:32:47.000Z",
+              "uid": "35240-73dfac5c-a14b-487a-b73a-ecf84de80460"
+            },
+            {
+              "id": "ea103d45-0bd5-4030-848e-20ac2e5fa04b",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"line_items\": [\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"quantity\": \"<integer>\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"<string>\"\n        }\n      ],\n      \"payment_method_types\": [\n        \"qrph\",\n        \"billease\"\n      ],\n      \"success_url\": \"<string>\",\n      \"cancel_url\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/checkout_sessions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "checkout_sessions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:32:47.000Z",
+              "updatedAt": "2026-07-28T02:32:47.000Z",
+              "uid": "35240-ea103d45-0bd5-4030-848e-20ac2e5fa04b"
+            }
+          ],
+          "createdAt": "2026-07-28T02:32:47.000Z",
+          "updatedAt": "2026-07-28T02:32:47.000Z",
+          "uid": "35240-1c906c0c-cc6e-4c89-9f57-8690cb80e7ee"
+        }
+      ],
+      "id": "403e2750-1552-4a80-9f30-a03b11009538",
+      "createdAt": "2026-07-28T02:32:47.000Z",
+      "updatedAt": "2026-07-28T02:32:47.000Z",
+      "uid": "35240-403e2750-1552-4a80-9f30-a03b11009538"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.paymongo.com/v1"
+    }
+  ]
+}

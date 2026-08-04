@@ -1,0 +1,345 @@
+{
+  "info": {
+    "_postman_id": "7d497128-8ef7-41c2-b892-c0c9428647dd",
+    "name": "PayMongo Checkout Sessions Payment Methods API",
+    "description": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:52.000Z",
+    "updatedAt": "2026-07-28T02:32:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7d497128-8ef7-41c2-b892-c0c9428647dd"
+  },
+  "item": [
+    {
+      "name": "payment_methods",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a Payment Method",
+              "id": "75ecb479-971e-41e9-9eee-3b4f9f3408b8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment_methods/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "35b1ce2b-e4d9-47a4-b80a-94b76bad2129",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "55700216-226a-42ef-9442-ee2ff736ae5b",
+                  "name": "Payment Method",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"type\": \"<string>\",\n      \"billing\": {}\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:53.000Z",
+                  "updatedAt": "2026-07-28T02:32:53.000Z",
+                  "uid": "35240-55700216-226a-42ef-9442-ee2ff736ae5b"
+                },
+                {
+                  "id": "eb62cbcb-36a0-486b-b964-b19702d5b85f",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_methods/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_methods",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:32:53.000Z",
+                  "updatedAt": "2026-07-28T02:32:53.000Z",
+                  "uid": "35240-eb62cbcb-36a0-486b-b964-b19702d5b85f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:53.000Z",
+              "updatedAt": "2026-07-28T02:32:53.000Z",
+              "uid": "35240-75ecb479-971e-41e9-9eee-3b4f9f3408b8"
+            }
+          ],
+          "id": "d0ff18d8-977a-4d05-b7ce-4990981f4728",
+          "createdAt": "2026-07-28T02:32:53.000Z",
+          "updatedAt": "2026-07-28T02:32:53.000Z",
+          "uid": "35240-d0ff18d8-977a-4d05-b7ce-4990981f4728"
+        },
+        {
+          "name": "Create a Payment Method",
+          "id": "4df3ee04-fc9e-4ba6-8972-f1538b0e059a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"dob\",\n      \"details\": {\n        \"card_number\": \"<string>\",\n        \"exp_month\": \"<integer>\",\n        \"exp_year\": \"<integer>\",\n        \"cvc\": \"<string>\"\n      },\n      \"billing\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"metadata\": {\n        \"Lorem_e25\": -9394670,\n        \"nulla59\": -83032956\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/payment_methods",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment_methods"
+              ]
+            },
+            "description": "Creates a Payment Method describing how the customer pays (card, gcash, grab_pay, paymaya, billease, dob, qrph). May be created with the public or secret API key."
+          },
+          "response": [
+            {
+              "id": "c2b54e6a-37db-44db-ae42-a473dd8de9e3",
+              "name": "Payment Method created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"dob\",\n      \"details\": {\n        \"card_number\": \"<string>\",\n        \"exp_month\": \"<integer>\",\n        \"exp_year\": \"<integer>\",\n        \"cvc\": \"<string>\"\n      },\n      \"billing\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"metadata\": {\n        \"Lorem_e25\": -9394670,\n        \"nulla59\": -83032956\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment_methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_methods"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"type\": \"<string>\",\n      \"billing\": {}\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:32:53.000Z",
+              "updatedAt": "2026-07-28T02:32:53.000Z",
+              "uid": "35240-c2b54e6a-37db-44db-ae42-a473dd8de9e3"
+            },
+            {
+              "id": "e2f596a8-8033-40f5-b50b-c318aa224280",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"dob\",\n      \"details\": {\n        \"card_number\": \"<string>\",\n        \"exp_month\": \"<integer>\",\n        \"exp_year\": \"<integer>\",\n        \"cvc\": \"<string>\"\n      },\n      \"billing\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"metadata\": {\n        \"Lorem_e25\": -9394670,\n        \"nulla59\": -83032956\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment_methods",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_methods"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:32:53.000Z",
+              "updatedAt": "2026-07-28T02:32:53.000Z",
+              "uid": "35240-e2f596a8-8033-40f5-b50b-c318aa224280"
+            }
+          ],
+          "createdAt": "2026-07-28T02:32:53.000Z",
+          "updatedAt": "2026-07-28T02:32:53.000Z",
+          "uid": "35240-4df3ee04-fc9e-4ba6-8972-f1538b0e059a"
+        }
+      ],
+      "id": "ff50b94a-a69e-4cc7-a13c-6a692eebf677",
+      "createdAt": "2026-07-28T02:32:53.000Z",
+      "updatedAt": "2026-07-28T02:32:53.000Z",
+      "uid": "35240-ff50b94a-a69e-4cc7-a13c-6a692eebf677"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.paymongo.com/v1"
+    }
+  ]
+}

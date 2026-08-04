@@ -1,0 +1,613 @@
+{
+  "info": {
+    "_postman_id": "a0df7efa-a9f4-4e60-a881-c00603155333",
+    "name": "PayMongo Checkout Sessions Webhooks API",
+    "description": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:04.000Z",
+    "updatedAt": "2026-07-28T02:33:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a0df7efa-a9f4-4e60-a881-c00603155333"
+  },
+  "item": [
+    {
+      "name": "webhooks",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "enable",
+              "item": [
+                {
+                  "name": "Enable a Webhook",
+                  "id": "b206907b-6ad4-4c4b-b34c-ff4028e53141",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:id/enable",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":id",
+                        "enable"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c7293c2d-aa76-4553-a7dd-89d5da9bdeb3",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d0ea7ea5-9ece-41a6-9a4e-0f73f976abd8",
+                      "name": "Webhook enabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhooks/:id/enable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhooks",
+                            ":id",
+                            "enable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"consectetur3ff\": -56676548.43183687\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:04.000Z",
+                      "updatedAt": "2026-07-28T02:33:04.000Z",
+                      "uid": "35240-d0ea7ea5-9ece-41a6-9a4e-0f73f976abd8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:33:04.000Z",
+                  "updatedAt": "2026-07-28T02:33:04.000Z",
+                  "uid": "35240-b206907b-6ad4-4c4b-b34c-ff4028e53141"
+                }
+              ],
+              "id": "7b2b65f8-c2d4-48df-9af8-3b69aa6f195d",
+              "createdAt": "2026-07-28T02:33:04.000Z",
+              "updatedAt": "2026-07-28T02:33:04.000Z",
+              "uid": "35240-7b2b65f8-c2d4-48df-9af8-3b69aa6f195d"
+            },
+            {
+              "name": "disable",
+              "item": [
+                {
+                  "name": "Disable a Webhook",
+                  "id": "049ef49a-b3db-4a21-94d3-9050b1f756fa",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:id/disable",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":id",
+                        "disable"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fbd01ecf-27d4-425e-b71e-903490351e8b",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "6e1b48bc-487f-47a5-ba65-3efb30c84c27",
+                      "name": "Webhook disabled",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/webhooks/:id/disable",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "webhooks",
+                            ":id",
+                            "disable"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"consectetur3ff\": -56676548.43183687\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:33:04.000Z",
+                      "updatedAt": "2026-07-28T02:33:04.000Z",
+                      "uid": "35240-6e1b48bc-487f-47a5-ba65-3efb30c84c27"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:33:04.000Z",
+                  "updatedAt": "2026-07-28T02:33:04.000Z",
+                  "uid": "35240-049ef49a-b3db-4a21-94d3-9050b1f756fa"
+                }
+              ],
+              "id": "968ec182-cbe1-4110-89e8-8a5409b07d2e",
+              "createdAt": "2026-07-28T02:33:04.000Z",
+              "updatedAt": "2026-07-28T02:33:04.000Z",
+              "uid": "35240-968ec182-cbe1-4110-89e8-8a5409b07d2e"
+            },
+            {
+              "name": "Retrieve a Webhook",
+              "id": "2e88779b-a603-4da3-9429-699fd678997a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "64fa2779-5d44-48e4-ae4f-ba2f2351a2f1",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "07058acd-f4bd-417e-bd41-17d7ed56edac",
+                  "name": "Webhook",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"consectetur3ff\": -56676548.43183687\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:04.000Z",
+                  "updatedAt": "2026-07-28T02:33:04.000Z",
+                  "uid": "35240-07058acd-f4bd-417e-bd41-17d7ed56edac"
+                },
+                {
+                  "id": "ca9fa2b6-7d99-4ec4-b956-4365b268fdf4",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/webhooks/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "webhooks",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:33:04.000Z",
+                  "updatedAt": "2026-07-28T02:33:04.000Z",
+                  "uid": "35240-ca9fa2b6-7d99-4ec4-b956-4365b268fdf4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:04.000Z",
+              "updatedAt": "2026-07-28T02:33:04.000Z",
+              "uid": "35240-2e88779b-a603-4da3-9429-699fd678997a"
+            }
+          ],
+          "id": "8cd93be1-b813-4ff0-98d2-2673280ecc7c",
+          "createdAt": "2026-07-28T02:33:04.000Z",
+          "updatedAt": "2026-07-28T02:33:04.000Z",
+          "uid": "35240-8cd93be1-b813-4ff0-98d2-2673280ecc7c"
+        },
+        {
+          "name": "Create a Webhook",
+          "id": "b71cee25-cdb9-4e21-8e1d-42510539b416",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"url\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            },
+            "description": "Registers a webhook endpoint subscribed to event types. Deliveries are signed HTTP POST callbacks (Paymongo-Signature header) - not a WebSocket. Each webhook has a signing secret used to verify payloads."
+          },
+          "response": [
+            {
+              "id": "dcba57c9-4b07-4bf6-8d31-d792d6da5c2c",
+              "name": "Webhook created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"url\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"consectetur3ff\": -56676548.43183687\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:33:04.000Z",
+              "updatedAt": "2026-07-28T02:33:04.000Z",
+              "uid": "35240-dcba57c9-4b07-4bf6-8d31-d792d6da5c2c"
+            },
+            {
+              "id": "ed310cde-0236-4b79-a33f-111abe0cc069",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"url\": \"<string>\",\n      \"events\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:33:04.000Z",
+              "updatedAt": "2026-07-28T02:33:04.000Z",
+              "uid": "35240-ed310cde-0236-4b79-a33f-111abe0cc069"
+            }
+          ],
+          "createdAt": "2026-07-28T02:33:04.000Z",
+          "updatedAt": "2026-07-28T02:33:04.000Z",
+          "uid": "35240-b71cee25-cdb9-4e21-8e1d-42510539b416"
+        },
+        {
+          "name": "List Webhooks",
+          "id": "50e2679e-012f-475b-9af3-239fd9d409c7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/webhooks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "webhooks"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b4a397ac-ef81-44b0-9668-20dc0dddb2b7",
+              "name": "A list of Webhooks",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/webhooks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "webhooks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"attributes\": {\n          \"sita5\": -38460711.33922493\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"attributes\": {\n          \"laboris81\": false,\n          \"pariatur_6\": 94102444.45987517,\n          \"dolore__3\": 31270524.671724513,\n          \"adipisicing_70b\": -99315856\n        }\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\"\n}",
+              "createdAt": "2026-07-28T02:33:04.000Z",
+              "updatedAt": "2026-07-28T02:33:04.000Z",
+              "uid": "35240-b4a397ac-ef81-44b0-9668-20dc0dddb2b7"
+            }
+          ],
+          "createdAt": "2026-07-28T02:33:04.000Z",
+          "updatedAt": "2026-07-28T02:33:04.000Z",
+          "uid": "35240-50e2679e-012f-475b-9af3-239fd9d409c7"
+        }
+      ],
+      "id": "64887ff9-0cfb-4258-98ad-f03ee107beab",
+      "createdAt": "2026-07-28T02:33:04.000Z",
+      "updatedAt": "2026-07-28T02:33:04.000Z",
+      "uid": "35240-64887ff9-0cfb-4258-98ad-f03ee107beab"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.paymongo.com/v1"
+    }
+  ]
+}

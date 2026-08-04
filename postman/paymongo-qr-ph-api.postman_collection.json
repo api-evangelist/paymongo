@@ -1,0 +1,213 @@
+{
+  "info": {
+    "_postman_id": "3cd314e4-1a17-471f-a85f-5905bf494e82",
+    "name": "PayMongo Checkout Sessions QR Ph API",
+    "description": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:00.000Z",
+    "updatedAt": "2026-07-28T02:33:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3cd314e4-1a17-471f-a85f-5905bf494e82"
+  },
+  "item": [
+    {
+      "name": "qr_codes",
+      "item": [
+        {
+          "name": "static",
+          "item": [
+            {
+              "name": "Create a static QR Ph code",
+              "id": "b680e2bc-b699-4c2e-90f1-a3a2640db1ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"aute_9\": -38685115,\n      \"consequat_6\": 87214264.2860024\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/qr_codes/static",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "qr_codes",
+                    "static"
+                  ]
+                },
+                "description": "Creates a reusable static QR Ph code for in-store acceptance."
+              },
+              "response": [
+                {
+                  "id": "930cc1a6-b0ca-4c4f-b1de-fbc543aef5c0",
+                  "name": "Static QR Ph created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"aute_9\": -38685115,\n      \"consequat_6\": 87214264.2860024\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/qr_codes/static",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qr_codes",
+                        "static"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"cillum_162\": \"ex et elit ad commodo\",\n      \"reprehenderit7\": false,\n      \"eiusmod1\": \"ut\",\n      \"deserunt_8d1\": \"id velit mollit ea\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:01.000Z",
+                  "updatedAt": "2026-07-28T02:33:01.000Z",
+                  "uid": "35240-930cc1a6-b0ca-4c4f-b1de-fbc543aef5c0"
+                },
+                {
+                  "id": "8c57d04b-4089-4153-8a2e-e4d1a3460054",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"aute_9\": -38685115,\n      \"consequat_6\": 87214264.2860024\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/qr_codes/static",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "qr_codes",
+                        "static"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:33:01.000Z",
+                  "updatedAt": "2026-07-28T02:33:01.000Z",
+                  "uid": "35240-8c57d04b-4089-4153-8a2e-e4d1a3460054"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:01.000Z",
+              "updatedAt": "2026-07-28T02:33:01.000Z",
+              "uid": "35240-b680e2bc-b699-4c2e-90f1-a3a2640db1ca"
+            }
+          ],
+          "id": "e4fa6bc4-32f2-4c46-bb16-250938f66eb1",
+          "createdAt": "2026-07-28T02:33:01.000Z",
+          "updatedAt": "2026-07-28T02:33:01.000Z",
+          "uid": "35240-e4fa6bc4-32f2-4c46-bb16-250938f66eb1"
+        }
+      ],
+      "id": "b19ee7bf-267d-4aec-b18d-2c937aad1cc5",
+      "createdAt": "2026-07-28T02:33:01.000Z",
+      "updatedAt": "2026-07-28T02:33:01.000Z",
+      "uid": "35240-b19ee7bf-267d-4aec-b18d-2c937aad1cc5"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.paymongo.com/v1"
+    }
+  ]
+}

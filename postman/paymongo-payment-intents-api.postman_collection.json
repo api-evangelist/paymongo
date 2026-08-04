@@ -1,0 +1,612 @@
+{
+  "info": {
+    "_postman_id": "fceb9b3b-74aa-4dbe-9873-d55af7f6da16",
+    "name": "PayMongo Checkout Sessions Payment Intents API",
+    "description": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:32:51.000Z",
+    "updatedAt": "2026-07-28T02:32:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fceb9b3b-74aa-4dbe-9873-d55af7f6da16"
+  },
+  "item": [
+    {
+      "name": "payment_intents",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "attach",
+              "item": [
+                {
+                  "name": "Attach a Payment Method to a Payment Intent",
+                  "id": "a79c67d9-6e00-45de-b023-e4b7b0ddb768",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"payment_method\": \"<string>\",\n      \"client_key\": \"<string>\",\n      \"return_url\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_intents/:id/attach",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_intents",
+                        ":id",
+                        "attach"
+                      ],
+                      "variable": [
+                        {
+                          "id": "baa127c0-57f9-4a68-96b8-1f416b2ae8f7",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                        }
+                      ]
+                    },
+                    "description": "Attaches a Payment Method to a Payment Intent to attempt the payment. For redirect-based methods (GCash, GrabPay, Maya) the response contains a next_action.redirect.url the customer must be sent to."
+                  },
+                  "response": [
+                    {
+                      "id": "bcfd1ef7-f97e-400d-80a1-b4d7fefb0875",
+                      "name": "Payment Intent after attach",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"payment_method\": \"<string>\",\n      \"client_key\": \"<string>\",\n      \"return_url\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/payment_intents/:id/attach",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payment_intents",
+                            ":id",
+                            "attach"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"awaiting_next_action\",\n      \"client_key\": \"<string>\",\n      \"next_action\": {\n        \"type\": \"<string>\",\n        \"redirect\": {\n          \"url\": \"<string>\",\n          \"return_url\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:32:51.000Z",
+                      "updatedAt": "2026-07-28T02:32:51.000Z",
+                      "uid": "35240-bcfd1ef7-f97e-400d-80a1-b4d7fefb0875"
+                    },
+                    {
+                      "id": "a8ceb111-0fa9-418d-b6fa-426137c878a5",
+                      "name": "Error response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"payment_method\": \"<string>\",\n      \"client_key\": \"<string>\",\n      \"return_url\": \"<string>\"\n    }\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/payment_intents/:id/attach",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "payment_intents",
+                            ":id",
+                            "attach"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:32:51.000Z",
+                      "updatedAt": "2026-07-28T02:32:51.000Z",
+                      "uid": "35240-a8ceb111-0fa9-418d-b6fa-426137c878a5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:32:51.000Z",
+                  "updatedAt": "2026-07-28T02:32:51.000Z",
+                  "uid": "35240-a79c67d9-6e00-45de-b023-e4b7b0ddb768"
+                }
+              ],
+              "id": "1a4e4582-462d-4285-9252-cfc175aecf8b",
+              "createdAt": "2026-07-28T02:32:51.000Z",
+              "updatedAt": "2026-07-28T02:32:51.000Z",
+              "uid": "35240-1a4e4582-462d-4285-9252-cfc175aecf8b"
+            },
+            {
+              "name": "Retrieve a Payment Intent",
+              "id": "90388e11-e2c5-4e81-a6d3-b1548ce5d920",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/payment_intents/:id?client_key=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_intents",
+                    ":id"
+                  ],
+                  "query": [
+                    {
+                      "description": "Client key allowing retrieval with the public key (client-side).",
+                      "key": "client_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "ef2551a6-f53f-43ad-9f54-8cbb2890da5a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "91d532c3-bb5b-406a-aa9b-d45c3510b1c9",
+                  "name": "Payment Intent",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_intents/:id?client_key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_intents",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Client key allowing retrieval with the public key (client-side).",
+                          "key": "client_key",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"awaiting_next_action\",\n      \"client_key\": \"<string>\",\n      \"next_action\": {\n        \"type\": \"<string>\",\n        \"redirect\": {\n          \"url\": \"<string>\",\n          \"return_url\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:32:51.000Z",
+                  "updatedAt": "2026-07-28T02:32:51.000Z",
+                  "uid": "35240-91d532c3-bb5b-406a-aa9b-d45c3510b1c9"
+                },
+                {
+                  "id": "0026cc29-ab8a-42b5-a6e5-0f70af089186",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/payment_intents/:id?client_key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payment_intents",
+                        ":id"
+                      ],
+                      "query": [
+                        {
+                          "description": "Client key allowing retrieval with the public key (client-side).",
+                          "key": "client_key",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:32:51.000Z",
+                  "updatedAt": "2026-07-28T02:32:51.000Z",
+                  "uid": "35240-0026cc29-ab8a-42b5-a6e5-0f70af089186"
+                }
+              ],
+              "createdAt": "2026-07-28T02:32:51.000Z",
+              "updatedAt": "2026-07-28T02:32:51.000Z",
+              "uid": "35240-90388e11-e2c5-4e81-a6d3-b1548ce5d920"
+            }
+          ],
+          "id": "4e4efcff-fbff-40af-8f5a-98cffd453862",
+          "createdAt": "2026-07-28T02:32:51.000Z",
+          "updatedAt": "2026-07-28T02:32:51.000Z",
+          "uid": "35240-4e4efcff-fbff-40af-8f5a-98cffd453862"
+        },
+        {
+          "name": "Create a Payment Intent",
+          "id": "1098ff29-22e3-46f0-b7bb-94da79578e07",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_method_allowed\": [\n        \"billease\",\n        \"gcash\"\n      ],\n      \"currency\": \"<string>\",\n      \"capture_type\": \"automatic\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"metadata\": {\n        \"id_a_\": -80331427.24938083\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/payment_intents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "payment_intents"
+              ]
+            },
+            "description": "Creates a Payment Intent that tracks the lifecycle of a payment. Uses the secret API key. Amount is an integer in centavos (minimum 2000 = PHP 20.00 for most methods)."
+          },
+          "response": [
+            {
+              "id": "754790f9-a230-4a98-ab05-fba9de9818e0",
+              "name": "Payment Intent created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_method_allowed\": [\n        \"billease\",\n        \"gcash\"\n      ],\n      \"currency\": \"<string>\",\n      \"capture_type\": \"automatic\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"metadata\": {\n        \"id_a_\": -80331427.24938083\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment_intents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_intents"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"status\": \"awaiting_next_action\",\n      \"client_key\": \"<string>\",\n      \"next_action\": {\n        \"type\": \"<string>\",\n        \"redirect\": {\n          \"url\": \"<string>\",\n          \"return_url\": \"<string>\"\n        }\n      }\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:32:51.000Z",
+              "updatedAt": "2026-07-28T02:32:51.000Z",
+              "uid": "35240-754790f9-a230-4a98-ab05-fba9de9818e0"
+            },
+            {
+              "id": "270af26a-0805-44f3-8e03-de7b96b5c53a",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_method_allowed\": [\n        \"billease\",\n        \"gcash\"\n      ],\n      \"currency\": \"<string>\",\n      \"capture_type\": \"automatic\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"metadata\": {\n        \"id_a_\": -80331427.24938083\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment_intents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_intents"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:32:51.000Z",
+              "updatedAt": "2026-07-28T02:32:51.000Z",
+              "uid": "35240-270af26a-0805-44f3-8e03-de7b96b5c53a"
+            },
+            {
+              "id": "cefd84f5-4c27-4f15-8b0f-427b0a0ce5a4",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_method_allowed\": [\n        \"billease\",\n        \"gcash\"\n      ],\n      \"currency\": \"<string>\",\n      \"capture_type\": \"automatic\",\n      \"description\": \"<string>\",\n      \"statement_descriptor\": \"<string>\",\n      \"metadata\": {\n        \"id_a_\": -80331427.24938083\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payment_intents",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payment_intents"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:32:51.000Z",
+              "updatedAt": "2026-07-28T02:32:51.000Z",
+              "uid": "35240-cefd84f5-4c27-4f15-8b0f-427b0a0ce5a4"
+            }
+          ],
+          "createdAt": "2026-07-28T02:32:51.000Z",
+          "updatedAt": "2026-07-28T02:32:51.000Z",
+          "uid": "35240-1098ff29-22e3-46f0-b7bb-94da79578e07"
+        }
+      ],
+      "id": "7e4a4b4d-4514-4c43-b31c-2146fa3da5c8",
+      "createdAt": "2026-07-28T02:32:51.000Z",
+      "updatedAt": "2026-07-28T02:32:51.000Z",
+      "uid": "35240-7e4a4b4d-4514-4c43-b31c-2146fa3da5c8"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.paymongo.com/v1"
+    }
+  ]
+}

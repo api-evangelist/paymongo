@@ -1,0 +1,32 @@
+{
+  "provider": "paymongo",
+  "sources": [
+    "paymongo-checkout-sessions-api-openapi.yml",
+    "paymongo-customers-api-openapi.yml",
+    "paymongo-payment-intents-api-openapi.yml",
+    "paymongo-payment-links-api-openapi.yml",
+    "paymongo-payment-methods-api-openapi.yml",
+    "paymongo-payments-api-openapi.yml",
+    "paymongo-qr-ph-api-openapi.yml",
+    "paymongo-refunds-api-openapi.yml",
+    "paymongo-sources-api-openapi.yml",
+    "paymongo-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "paymongo-checkout-sessions-api-openapi.yml",
+    "paymongo-customers-api-openapi.yml",
+    "paymongo-payment-intents-api-openapi.yml",
+    "paymongo-payment-links-api-openapi.yml",
+    "paymongo-payment-methods-api-openapi.yml",
+    "paymongo-payments-api-openapi.yml",
+    "paymongo-qr-ph-api-openapi.yml",
+    "paymongo-refunds-api-openapi.yml",
+    "paymongo-sources-api-openapi.yml",
+    "paymongo-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

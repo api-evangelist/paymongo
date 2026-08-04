@@ -1,0 +1,417 @@
+{
+  "info": {
+    "_postman_id": "7a0a6bd6-5056-46b0-b5f0-303daf14829e",
+    "name": "PayMongo Checkout Sessions Refunds API",
+    "description": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:33:01.000Z",
+    "updatedAt": "2026-07-28T02:33:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7a0a6bd6-5056-46b0-b5f0-303daf14829e"
+  },
+  "item": [
+    {
+      "name": "refunds",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a Refund",
+              "id": "393e32a6-0360-4bc6-a4b9-4086c967ae55",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/refunds/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7effb14f-a8b1-410b-960d-e675df6ce223",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f8f838db-ac7e-4d19-a6e6-db0e7d83bb74",
+                  "name": "Refund",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"aliqua_3bb\": 67329240.16877514\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:33:02.000Z",
+                  "updatedAt": "2026-07-28T02:33:02.000Z",
+                  "uid": "35240-f8f838db-ac7e-4d19-a6e6-db0e7d83bb74"
+                },
+                {
+                  "id": "9371010b-10f2-4c4c-94d1-5ee64f85d56e",
+                  "name": "Error response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/refunds/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "refunds",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:33:02.000Z",
+                  "updatedAt": "2026-07-28T02:33:02.000Z",
+                  "uid": "35240-9371010b-10f2-4c4c-94d1-5ee64f85d56e"
+                }
+              ],
+              "createdAt": "2026-07-28T02:33:02.000Z",
+              "updatedAt": "2026-07-28T02:33:02.000Z",
+              "uid": "35240-393e32a6-0360-4bc6-a4b9-4086c967ae55"
+            }
+          ],
+          "id": "82a5c0f3-8062-47df-947b-8745e0d21975",
+          "createdAt": "2026-07-28T02:33:02.000Z",
+          "updatedAt": "2026-07-28T02:33:02.000Z",
+          "uid": "35240-82a5c0f3-8062-47df-947b-8745e0d21975"
+        },
+        {
+          "name": "Create a Refund",
+          "id": "04c4ffb0-fe4f-4c48-8cbb-505905af3d29",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_id\": \"<string>\",\n      \"reason\": \"fraudulent\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/refunds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ]
+            },
+            "description": "Refunds all or part of a Payment. Amount is an integer in centavos; reason is one of duplicate, fraudulent, requested_by_customer, others."
+          },
+          "response": [
+            {
+              "id": "4058660c-9eac-4fcf-a935-4f9d080ae626",
+              "name": "Refund created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_id\": \"<string>\",\n      \"reason\": \"fraudulent\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\",\n    \"attributes\": {\n      \"aliqua_3bb\": 67329240.16877514\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:33:02.000Z",
+              "updatedAt": "2026-07-28T02:33:02.000Z",
+              "uid": "35240-4058660c-9eac-4fcf-a935-4f9d080ae626"
+            },
+            {
+              "id": "410a2293-908a-4f32-a6dd-5cc9d903762b",
+              "name": "Error response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"payment_id\": \"<string>\",\n      \"reason\": \"fraudulent\",\n      \"notes\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"attribute\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:33:02.000Z",
+              "updatedAt": "2026-07-28T02:33:02.000Z",
+              "uid": "35240-410a2293-908a-4f32-a6dd-5cc9d903762b"
+            }
+          ],
+          "createdAt": "2026-07-28T02:33:02.000Z",
+          "updatedAt": "2026-07-28T02:33:02.000Z",
+          "uid": "35240-04c4ffb0-fe4f-4c48-8cbb-505905af3d29"
+        },
+        {
+          "name": "List Refunds",
+          "id": "39fe0a76-37f1-4726-a1a9-49f2daff946c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/refunds",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "refunds"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4729e4b-f229-4a23-a084-efc61b17d2e0",
+              "name": "A list of Refunds",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/refunds",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "refunds"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"data\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"attributes\": {\n          \"occaecat4_6\": false,\n          \"temporff_\": 77315032\n        }\n      }\n    },\n    {\n      \"data\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"attributes\": {\n          \"commodo_ad\": -1062310.8254750818\n        }\n      }\n    }\n  ],\n  \"has_more\": \"<boolean>\"\n}",
+              "createdAt": "2026-07-28T02:33:02.000Z",
+              "updatedAt": "2026-07-28T02:33:02.000Z",
+              "uid": "35240-a4729e4b-f229-4a23-a084-efc61b17d2e0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:33:02.000Z",
+          "updatedAt": "2026-07-28T02:33:02.000Z",
+          "uid": "35240-39fe0a76-37f1-4726-a1a9-49f2daff946c"
+        }
+      ],
+      "id": "acd8dfbe-a960-4122-9ee8-34aa5eb3b3fb",
+      "createdAt": "2026-07-28T02:33:02.000Z",
+      "updatedAt": "2026-07-28T02:33:02.000Z",
+      "uid": "35240-acd8dfbe-a960-4122-9ee8-34aa5eb3b3fb"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.paymongo.com/v1"
+    }
+  ]
+}
