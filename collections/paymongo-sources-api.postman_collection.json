@@ -1,0 +1,340 @@
+{
+  "item": [
+    {
+      "id": "dadaadcc-ba28-421c-900a-e1fa7785215f",
+      "name": "Sources",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1b07fd6c-bfd1-4d3b-a3db-01e073b11ed3",
+          "name": "Create a Source (legacy GCash / GrabPay workflow)",
+          "request": {
+            "name": "Create a Source (legacy GCash / GrabPay workflow)",
+            "description": {
+              "content": "Legacy Sources workflow for GCash and GrabPay. Generates a redirect checkout_url the customer authorizes. PayMongo recommends migrating to the Payment Intent workflow.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"<string>\",\n      \"type\": \"<string>\",\n      \"redirect\": {\n        \"success\": \"<string>\",\n        \"failed\": \"<string>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66a9cc5d-92dd-49ec-ab48-81139ce50d4a",
+              "name": "Source created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"PHP\",\n      \"type\": \"<string>\",\n      \"redirect\": {\n        \"success\": \"<string>\",\n        \"failed\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"src_xxx\",\n    \"type\": \"source\",\n    \"attributes\": {\n      \"amount\": 8167,\n      \"currency\": \"string\",\n      \"status\": \"expired\",\n      \"type\": \"string\",\n      \"redirect\": {\n        \"checkout_url\": \"string\",\n        \"success\": \"string\",\n        \"failed\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50d37c79-07ef-4211-96d1-fc219246f4fe",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"currency\": \"PHP\",\n      \"type\": \"<string>\",\n      \"redirect\": {\n        \"success\": \"<string>\",\n        \"failed\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    },\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7414577-e3cb-4519-bf7c-d4895087d501",
+          "name": "Retrieve a Source",
+          "request": {
+            "name": "Retrieve a Source",
+            "description": {},
+            "url": {
+              "path": [
+                "sources",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4c7bd1f-b534-4b49-9d40-2c561ed1f3a9",
+              "name": "Source",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"src_xxx\",\n    \"type\": \"source\",\n    \"attributes\": {\n      \"amount\": 8167,\n      \"currency\": \"string\",\n      \"status\": \"expired\",\n      \"type\": \"string\",\n      \"redirect\": {\n        \"checkout_url\": \"string\",\n        \"success\": \"string\",\n        \"failed\": \"string\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58b73e7d-f07b-4f2d-bfe1-a84a3f3c4a43",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sources",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    },\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.paymongo.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2d6ef359-7a2f-457f-82db-5955455ac64c",
+    "name": "PayMongo Checkout Sessions Sources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+      "type": "text/plain"
+    }
+  }
+}

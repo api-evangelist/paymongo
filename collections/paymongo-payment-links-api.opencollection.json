@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions Payment Links API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Payment Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/links",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a shareable Payment Link. (The newer Payment Links surface is also available under /payment_links.)"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payment Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/links/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Payment Link"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

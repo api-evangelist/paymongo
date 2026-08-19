@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions Payments API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/payments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all Payments"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Payment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions Refunds API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Refunds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/refunds"
+          },
+          "docs": "List Refunds"
+        },
+        {
+          "info": {
+            "name": "Create a Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/refunds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refunds all or part of a Payment. Amount is an integer in centavos; reason is one of duplicate, fraudulent, requested_by_customer, others."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/refunds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Refund"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,340 @@
+{
+  "item": [
+    {
+      "id": "2f359100-2e9e-42f1-b187-f0093a2e74ab",
+      "name": "Payment Links",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de21abe4-4f02-46a5-8ee5-21d2e9c5ac7f",
+          "name": "Create a Payment Link",
+          "request": {
+            "name": "Create a Payment Link",
+            "description": {
+              "content": "Creates a shareable Payment Link. (The newer Payment Links surface is also available under /payment_links.)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "links"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"remarks\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc48f7aa-b13a-4043-b955-315d6ace5ba8",
+              "name": "Payment Link created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"remarks\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"attributes\": {\n      \"key_0\": 5456,\n      \"key_1\": 6748\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "290d36c7-5c07-4af1-ba15-06fcd6a1516f",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"amount\": \"<integer>\",\n      \"description\": \"<string>\",\n      \"remarks\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    },\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9be70db-fb73-447a-88a2-a0d859b9363c",
+          "name": "Retrieve a Payment Link",
+          "request": {
+            "name": "Retrieve a Payment Link",
+            "description": {},
+            "url": {
+              "path": [
+                "links",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7a0e673b-dd75-476e-9296-b09585b98933",
+              "name": "Payment Link",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"string\",\n    \"attributes\": {\n      \"key_0\": 5456,\n      \"key_1\": 6748\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5d7bf23-a037-43b7-a1ee-1fded04d524a",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    },\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.paymongo.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "104cf5f8-5634-4b83-9a04-580ceadaa2c9",
+    "name": "PayMongo Checkout Sessions Payment Links API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+      "type": "text/plain"
+    }
+  }
+}

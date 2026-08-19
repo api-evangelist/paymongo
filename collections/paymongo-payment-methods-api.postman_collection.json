@@ -1,0 +1,340 @@
+{
+  "item": [
+    {
+      "id": "affa6595-dea3-4b72-bb02-2e18d75c3c3a",
+      "name": "Payment Methods",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b4a03303-a0c2-4d31-ae45-8a39cc7eda67",
+          "name": "Create a Payment Method",
+          "request": {
+            "name": "Create a Payment Method",
+            "description": {
+              "content": "Creates a Payment Method describing how the customer pays (card, gcash, grab_pay, paymaya, billease, dob, qrph). May be created with the public or secret API key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"<string>\",\n      \"details\": {\n        \"card_number\": \"<string>\",\n        \"exp_month\": \"<integer>\",\n        \"exp_year\": \"<integer>\",\n        \"cvc\": \"<string>\"\n      },\n      \"billing\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": true\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40e35cee-286a-4c52-8173-8a9a23e40d0f",
+              "name": "Payment Method created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"<string>\",\n      \"details\": {\n        \"card_number\": \"<string>\",\n        \"exp_month\": \"<integer>\",\n        \"exp_year\": \"<integer>\",\n        \"cvc\": \"<string>\"\n      },\n      \"billing\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 4858,\n        \"key_1\": 2846,\n        \"key_2\": 2123.7901344395773\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"pm_xxx\",\n    \"type\": \"payment_method\",\n    \"attributes\": {\n      \"type\": \"string\",\n      \"billing\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14749b71-f05f-4baa-9f80-4fdcf657e729",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"type\": \"<string>\",\n      \"details\": {\n        \"card_number\": \"<string>\",\n        \"exp_month\": \"<integer>\",\n        \"exp_year\": \"<integer>\",\n        \"cvc\": \"<string>\"\n      },\n      \"billing\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"metadata\": {\n        \"key_0\": 4858,\n        \"key_1\": 2846,\n        \"key_2\": 2123.7901344395773\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    },\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f502175a-1ceb-464b-9cd6-9ce85679a4cc",
+          "name": "Retrieve a Payment Method",
+          "request": {
+            "name": "Retrieve a Payment Method",
+            "description": {},
+            "url": {
+              "path": [
+                "payment_methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fe27a43-4457-462e-ba68-fb8a10e51d14",
+              "name": "Payment Method",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"pm_xxx\",\n    \"type\": \"payment_method\",\n    \"attributes\": {\n      \"type\": \"string\",\n      \"billing\": {}\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60e70cd8-fef4-47af-9277-33f7bf9a9ece",
+              "name": "Error response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    },\n    {\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"attribute\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.paymongo.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d1df16a1-e2f1-42ee-a2b4-be2379b882c8",
+    "name": "PayMongo Checkout Sessions Payment Methods API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).\n\nContact Support:\n Name: PayMongo Developer Support\n Email: support@paymongo.com",
+      "type": "text/plain"
+    }
+  }
+}

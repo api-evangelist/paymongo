@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions Payment Intents API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Intents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Payment Intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/payment_intents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Payment Intent that tracks the lifecycle of a payment. Uses the secret API key. Amount is an integer in centavos (minimum 2000 = PHP 20.00 for most methods)."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payment Intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/payment_intents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              },
+              {
+                "name": "client_key",
+                "value": "",
+                "type": "query",
+                "description": "Client key allowing retrieval with the public key (client-side)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Payment Intent"
+        },
+        {
+          "info": {
+            "name": "Attach a Payment Method to a Payment Intent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/payment_intents/:id/attach",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attaches a Payment Method to a Payment Intent to attempt the payment. For redirect-based methods (GCash, GrabPay, Maya) the response contains a next_action.redirect.url the customer must be sent to."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

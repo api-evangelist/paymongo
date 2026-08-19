@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions Customers API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/customers"
+          },
+          "docs": "List Customers"
+        },
+        {
+          "info": {
+            "name": "Create a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Customer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Customer"
+        },
+        {
+          "info": {
+            "name": "Update a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.paymongo.com/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a Customer"
+        },
+        {
+          "info": {
+            "name": "Delete a Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.paymongo.com/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ]
+          },
+          "docs": "Delete a Customer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions Payment Methods API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/payment_methods",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Payment Method describing how the customer pays (card, gcash, grab_pay, paymaya, billease, dob, qrph). May be created with the public or secret API key."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.paymongo.com/v1/payment_methods/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the resource (e.g. pi_..., pm_..., pay_...)."
+              }
+            ]
+          },
+          "docs": "Retrieve a Payment Method"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

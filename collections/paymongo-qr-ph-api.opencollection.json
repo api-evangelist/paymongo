@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PayMongo Checkout Sessions QR Ph API",
+    "version": "2020-08-08"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "QR Ph",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a static QR Ph code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.paymongo.com/v1/qr_codes/static",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a reusable static QR Ph code for in-store acceptance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
