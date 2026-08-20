@@ -25,6 +25,14 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paymongo.png
 tags:
 - Payments
+- Fintech
+- Philippines
+- Southeast Asia
+- GCash
+- E-Wallet
+- Card Payments
+tags_raw:
+- Payments
 - FinTech
 - Philippines
 - Southeast Asia
@@ -563,6 +571,8 @@ apis:
   humanURL: https://docs.paymongo.com/reference/the-payment-intent-object
   baseURL: https://api.paymongo.com/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
