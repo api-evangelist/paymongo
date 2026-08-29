@@ -9,6 +9,18 @@ description: PayMongo is a Philippine payments platform that lets businesses acc
   Payment Links, Customers, Refunds, Subscriptions, and signed Webhooks. Amounts
   are integers in centavos and PHP is the settlement currency; PayMongo is a
   PCI DSS Level 1 Service Provider.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
