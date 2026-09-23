@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: PayMongo Checkout Sessions Sources API
+  title: PayMongo Sources API
   description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
   version: '2020-08-08'
   termsOfService: https://www.paymongo.com/terms
@@ -56,6 +56,14 @@ paths:
         '404':
           $ref: '#/components/responses/Error'
 components:
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
   schemas:
     ErrorResponse:
       type: object
@@ -158,14 +166,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
   securitySchemes:
     basicAuth:
       type: http

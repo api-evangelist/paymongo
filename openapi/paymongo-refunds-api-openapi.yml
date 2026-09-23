@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: PayMongo Checkout Sessions Refunds API
+  title: PayMongo Refunds API
   description: PayMongo is a Philippine payments platform. The REST API lets businesses accept payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase (buy-now-pay-later), and direct online banking, using the Payment Intent / Payment Method workflow, hosted Checkout Sessions, Payment Links, Customers, Refunds, and Webhooks. All amounts are integers in centavos (1 PHP = 100). PHP is the only settlement currency (card intents may optionally be switched to USD).
   version: '2020-08-08'
   termsOfService: https://www.paymongo.com/terms
@@ -69,34 +69,6 @@ paths:
           $ref: '#/components/responses/Error'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
-                    type: string
-                  attribute:
-                    type: string
-    GenericList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenericResource'
-        has_more:
-          type: boolean
     RefundCreate:
       type: object
       required:
@@ -127,6 +99,34 @@ components:
                   - others
                 notes:
                   type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
+    GenericList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericResource'
+        has_more:
+          type: boolean
     GenericResource:
       type: object
       properties:
@@ -140,13 +140,6 @@ components:
             attributes:
               type: object
               additionalProperties: true
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     ResourceId:
       name: id
@@ -155,6 +148,13 @@ components:
       schema:
         type: string
       description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
