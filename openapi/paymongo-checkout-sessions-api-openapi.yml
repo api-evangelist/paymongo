@@ -71,34 +71,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericResource'
 components:
-  parameters:
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
-                    type: string
-                  attribute:
-                    type: string
     CheckoutSessionCreate:
       type: object
       required:
@@ -158,6 +131,25 @@ components:
             attributes:
               type: object
               additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
   responses:
     Error:
       description: Error response
@@ -165,6 +157,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
   securitySchemes:
     basicAuth:
       type: http

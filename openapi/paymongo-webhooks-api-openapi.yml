@@ -98,34 +98,28 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenericResource'
 components:
-  parameters:
-    ResourceId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
   schemas:
-    ErrorResponse:
+    WebhookCreate:
       type: object
+      required:
+      - data
       properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
+        data:
+          type: object
+          properties:
+            attributes:
+              type: object
+              required:
+              - url
+              - events
+              properties:
+                url:
+                  type: string
+                events:
+                  type: array
+                  items:
                     type: string
-                  attribute:
-                    type: string
+                    example: payment.paid
     GenericList:
       type: object
       properties:
@@ -148,27 +142,25 @@ components:
             attributes:
               type: object
               additionalProperties: true
-    WebhookCreate:
+    ErrorResponse:
       type: object
-      required:
-      - data
       properties:
-        data:
-          type: object
-          properties:
-            attributes:
-              type: object
-              required:
-              - url
-              - events
-              properties:
-                url:
-                  type: string
-                events:
-                  type: array
-                  items:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
                     type: string
-                    example: payment.paid
+                  attribute:
+                    type: string
   responses:
     Error:
       description: Error response
@@ -176,6 +168,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ResourceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
   securitySchemes:
     basicAuth:
       type: http

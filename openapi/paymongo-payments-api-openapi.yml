@@ -94,6 +94,15 @@ components:
                   - failed
                 source:
                   type: object
+    PaymentList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResource'
+        has_more:
+          type: boolean
     ErrorResponse:
       type: object
       properties:
@@ -113,15 +122,13 @@ components:
                     type: string
                   attribute:
                     type: string
-    PaymentList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentResource'
-        has_more:
-          type: boolean
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     ResourceId:
       name: id
@@ -130,13 +137,6 @@ components:
       schema:
         type: string
       description: The identifier of the resource (e.g. pi_..., pm_..., pay_...).
-  responses:
-    Error:
-      description: Error response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
