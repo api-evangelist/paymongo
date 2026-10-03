@@ -76,6 +76,38 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    GenericResource:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            attributes:
+              type: object
+              additionalProperties: true
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
     GenericList:
       type: object
       properties:
@@ -115,38 +147,6 @@ components:
                   - others
                 notes:
                   type: string
-    GenericResource:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-            attributes:
-              type: object
-              additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
-                    type: string
-                  attribute:
-                    type: string
   parameters:
     ResourceId:
       name: id

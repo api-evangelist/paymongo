@@ -47,6 +47,25 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              detail:
+                type: string
+              source:
+                type: object
+                properties:
+                  pointer:
+                    type: string
+                  attribute:
+                    type: string
     GenericResource:
       type: object
       properties:
@@ -69,25 +88,6 @@ components:
             attributes:
               type: object
               additionalProperties: true
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-              detail:
-                type: string
-              source:
-                type: object
-                properties:
-                  pointer:
-                    type: string
-                  attribute:
-                    type: string
   securitySchemes:
     basicAuth:
       type: http
