@@ -1,0 +1,43 @@
+slug: paymongo
+provider: PayMongo
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Webhooks
+  spec_file: paymongo-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.75
+  evidence: POST /webhooks 'Create a Webhook'; POST /webhooks/{id}/enable 'Enable a Webhook'
+  reason: Full lifecycle management of outbound webhook subscriptions exposed to integrating developers,
+    which is exactly webhook & event subscription management in the developer platform capability.
+- tag: Payment Intents
+  spec_file: paymongo-payment-intents-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: POST /payment_intents 'Create a Payment Intent'; POST /payment_intents/{id}/attach 'Attach
+    a Payment Method to a Payment Intent'
+  reason: Payment intent creation plus payment-method attachment is payment authorisation and payment-method
+    handling, matching 'Payment-method management, payment authorisation'.
+- tag: Payment Methods
+  spec_file: paymongo-payment-methods-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: POST /payment_methods 'Create a Payment Method'; schema 'PaymentMethodCreate'
+  reason: Explicitly creates and retrieves payment methods (cards, wallets), which is payment-method management
+    under payment collection.

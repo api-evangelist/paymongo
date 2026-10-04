@@ -640,6 +640,9 @@ apis:
   - type: APIReference
     url: https://docs.paymongo.com/reference/fraud-detection-overview
 common:
+- type: CapabilityMap
+  url: capabilities/paymongo-capability-edges.yml
+  name: PayMongo Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/paymongo/overview
 - type: AgenticAccess
