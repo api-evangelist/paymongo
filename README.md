@@ -1,4 +1,4 @@
-# PayMongo (paymongo)
+# PayMongo
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,303 +66,174 @@
 
 PayMongo is a Philippine payments platform that lets businesses accept online payments via cards, GCash, Maya (PayMaya), GrabPay, ShopeePay, QR Ph, BillEase buy-now-pay-later, and direct online banking. Its REST API is built around the Payment Intent / Payment Method workflow with hosted Checkout Sessions, Payment Links, Customers, Refunds, Subscriptions, and signed Webhooks. Amounts are integers in centavos and PHP is the settlement currency; PayMongo is a PCI DSS Level 1 Service Provider.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/paymongo/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/paymongo/refs/heads/main/apis.yml)
+**Areas:** Payments · Fintech · Philippines · Southeast Asia · GCash · Digital Wallet · Card Payments
 
-## Tags
+## PayMongo on APIs.io
 
-- Payments
-- FinTech
-- Philippines
-- Southeast Asia
-- GCash
-- E-Wallet
-- Card Payments
+Everything profiled for PayMongo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/paymongo/](https://apis.io/providers/paymongo/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (10)
 
-- **Created:** 2026-07-17
-- **Modified:** 2026-07-17
+- [PayMongo Checkout Sessions API](https://apis.io/apis/paymongo/paymongo-checkout-sessions-api/) — The Checkout Sessions API from PayMongo — 3 operation(s) for checkout sessions.
+- [PayMongo Customers API](https://apis.io/apis/paymongo/paymongo-customers-api/) — The Customers API from PayMongo — 2 operation(s) for customers.
+- [PayMongo Payment Intents API](https://apis.io/apis/paymongo/paymongo-payment-intents-api/) — The Payment Intents API from PayMongo — 3 operation(s) for payment intents.
+- [PayMongo Payment Links API](https://apis.io/apis/paymongo/paymongo-payment-links-api/) — The Payment Links API from PayMongo — 2 operation(s) for payment links.
+- [PayMongo Payment Methods API](https://apis.io/apis/paymongo/paymongo-payment-methods-api/) — The Payment Methods API from PayMongo — 2 operation(s) for payment methods.
+- [PayMongo Payments API](https://apis.io/apis/paymongo/paymongo-payments-api/) — The Payments API from PayMongo — 2 operation(s) for payments.
+- [PayMongo QR Ph API](https://apis.io/apis/paymongo/paymongo-qr-ph-api/) — The QR Ph API from PayMongo — 1 operation(s) for qr ph.
+- [PayMongo Refunds API](https://apis.io/apis/paymongo/paymongo-refunds-api/) — The Refunds API from PayMongo — 2 operation(s) for refunds.
+- [PayMongo Sources API](https://apis.io/apis/paymongo/paymongo-sources-api/) — The Sources API from PayMongo — 2 operation(s) for sources.
+- [PayMongo Webhooks API](https://apis.io/apis/paymongo/paymongo-webhooks-api/) — The Webhooks API from PayMongo — 4 operation(s) for webhooks.
 
-## APIs
+### Published properties
 
-### PayMongo Payment Intents API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Core payment-acceptance workflow. Create a Payment Intent, attach a Payment Method, and confirm the payment across cards, GCash, Maya, GrabPay, QR Ph, BillEase, and direct online banking, with manual or automatic capture.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.paymongo.com/reference/the-payment-intent-object](https://docs.paymongo.com/reference/the-payment-intent-object)
-- **Base URL:** `https://api.paymongo.com/v1`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Paymongo Webhooks](https://apis.io/asyncapis/paymongo/paymongo-webhooks/)
 
-- Payment Intents
-- Payments
-- Checkout
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://docs.paymongo.com/docs/payment-acceptance-introduction)
-- [API Reference](https://docs.paymongo.com/reference/create-a-paymentintent)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [paymongo](https://apis.io/servers/paymongo/paymongo/)
 
-### PayMongo Payment Methods API
+#### Agentic access (1)
 
-Creates and retrieves Payment Method resources describing how the customer pays (card, gcash, grab_pay, paymaya, billease, dob, qrph). May be created with the public or secret API key.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.paymongo.com/reference/the-payment-method-object](https://docs.paymongo.com/reference/the-payment-method-object)
-- **Base URL:** `https://api.paymongo.com/v1`
+- [Paymongo Agentic Access](https://apis.io/agentic-access/paymongo/paymongo-agentic-access/)
 
-#### Tags
+#### Collections (20)
 
-- Payment Methods
-- Cards
-- E-Wallet
+Postman and Open Collection request collections.
 
-#### Properties
+- [PayMongo Checkout Sessions API](https://apis.io/collections/paymongo/open-paymongo-checkout-sessions-api/)
+- [PayMongo Checkout Sessions Customers API](https://apis.io/collections/paymongo/open-paymongo-customers-api/)
+- [PayMongo Checkout Sessions Payment Intents API](https://apis.io/collections/paymongo/open-paymongo-payment-intents-api/)
+- [PayMongo Checkout Sessions Payment Links API](https://apis.io/collections/paymongo/open-paymongo-payment-links-api/)
+- [PayMongo Checkout Sessions Payment Methods API](https://apis.io/collections/paymongo/open-paymongo-payment-methods-api/)
+- [PayMongo Checkout Sessions Payments API](https://apis.io/collections/paymongo/open-paymongo-payments-api/)
+- [PayMongo Checkout Sessions QR Ph API](https://apis.io/collections/paymongo/open-paymongo-qr-ph-api/)
+- [PayMongo Checkout Sessions Refunds API](https://apis.io/collections/paymongo/open-paymongo-refunds-api/)
+- [PayMongo Checkout Sessions Sources API](https://apis.io/collections/paymongo/open-paymongo-sources-api/)
+- [PayMongo Checkout Sessions Webhooks API](https://apis.io/collections/paymongo/open-paymongo-webhooks-api/)
+- [PayMongo Checkout Sessions API](https://apis.io/collections/paymongo/postman-paymongo-checkout-sessions-api/)
+- [PayMongo Checkout Sessions Customers API](https://apis.io/collections/paymongo/postman-paymongo-customers-api/)
+- [PayMongo Checkout Sessions Payment Intents API](https://apis.io/collections/paymongo/postman-paymongo-payment-intents-api/)
+- [PayMongo Checkout Sessions Payment Links API](https://apis.io/collections/paymongo/postman-paymongo-payment-links-api/)
+- [PayMongo Checkout Sessions Payment Methods API](https://apis.io/collections/paymongo/postman-paymongo-payment-methods-api/)
+- [PayMongo Checkout Sessions Payments API](https://apis.io/collections/paymongo/postman-paymongo-payments-api/)
+- [PayMongo Checkout Sessions QR Ph API](https://apis.io/collections/paymongo/postman-paymongo-qr-ph-api/)
+- [PayMongo Checkout Sessions Refunds API](https://apis.io/collections/paymongo/postman-paymongo-refunds-api/)
+- [PayMongo Checkout Sessions Sources API](https://apis.io/collections/paymongo/postman-paymongo-sources-api/)
+- [PayMongo Checkout Sessions Webhooks API](https://apis.io/collections/paymongo/postman-paymongo-webhooks-api/)
 
-- [API Reference](https://docs.paymongo.com/reference/create-a-paymentmethod)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+#### Overlays (1)
 
-### PayMongo Payments API
+OpenAPI overlays, including conversational phrasing for each operation.
 
-Lists and retrieves completed Payment resources with amount, fee, net_amount, and status for reconciliation.
+- [Paymongo Openapi Overlay](https://apis.io/overlays/paymongo/paymongo-openapi-overlay/)
 
-- **Human URL:** [https://docs.paymongo.com/reference/list-all-payments](https://docs.paymongo.com/reference/list-all-payments)
-- **Base URL:** `https://api.paymongo.com/v1`
+#### Security (4)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Payments
-- Transactions
+- [Paymongo Authentication](https://apis.io/security/paymongo/paymongo-authentication/)
+- [Paymongo Domain Security](https://apis.io/security/paymongo/paymongo-domain-security/)
+- [Paymongo Trust Center](https://apis.io/security/paymongo/paymongo-trust-center/)
+- [Paymongo Vulnerability Disclosure](https://apis.io/security/paymongo/paymongo-vulnerability-disclosure/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [API Reference](https://docs.paymongo.com/reference/list-all-payments)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+Published plans, tiers and prices.
 
-### PayMongo Sources API
+- [Paymongo Plans Pricing](https://apis.io/plans/paymongo/paymongo-plans-pricing/)
 
-Legacy Sources workflow for GCash and GrabPay redirect payments. PayMongo recommends migrating to the Payment Intent workflow; documented here for existing integrations.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.paymongo.com/docs/older-workflows](https://docs.paymongo.com/docs/older-workflows)
-- **Base URL:** `https://api.paymongo.com/v1`
+Published request limits.
 
-#### Tags
+- [Paymongo Rate Limits](https://apis.io/rate-limits/paymongo/paymongo-rate-limits/)
 
-- Sources
-- GCash
-- GrabPay
-- Legacy
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.paymongo.com/docs/older-workflows)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Paymongo Finops](https://apis.io/finops/paymongo/paymongo-finops/)
 
-### PayMongo Checkout Sessions API
+## Where to find this API
 
-Creates a PayMongo-hosted checkout page from your backend, returning a checkout_url to redirect the customer to. Sessions can be retrieved and expired.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.paymongo.com/reference/checkout-session-resource](https://docs.paymongo.com/reference/checkout-session-resource)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Hosted Checkout
-- Checkout
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/payment-channels-hosted-checkout)
-- [API Reference](https://docs.paymongo.com/reference/create_checkout_sessions)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayMongo Payment Links API
-
-Creates, lists, updates, and refunds shareable Payment Links that collect a fixed or open amount without building a checkout UI.
-
-- **Human URL:** [https://docs.paymongo.com/reference/payment-links](https://docs.paymongo.com/reference/payment-links)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Payment Links
-- No Code
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/payment-channels-payment-links)
-- [API Reference](https://docs.paymongo.com/reference/post_v1-payment-links)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayMongo Customers API
-
-Manages Customer objects and their vaulted payment methods for repeat purchases and card-on-file flows.
-
-- **Human URL:** [https://docs.paymongo.com/reference/retrieve-customer](https://docs.paymongo.com/reference/retrieve-customer)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Customers
-- Vaulting
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/payment-acceptance-card-vaulting)
-- [API Reference](https://docs.paymongo.com/reference/retrieve-customer)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayMongo Refunds API
-
-Issues full or partial refunds against a Payment, with reason codes (duplicate, fraudulent, requested_by_customer, others).
-
-- **Human URL:** [https://docs.paymongo.com/docs/payment-acceptance-refunds](https://docs.paymongo.com/docs/payment-acceptance-refunds)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Refunds
-- Disputes
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/payment-acceptance-refunds)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayMongo QR Ph API
-
-Generates dynamic (API-driven) and static (in-store) QR Ph codes - the Philippine national QR standard - and confirms payment via webhook or polling.
-
-- **Human URL:** [https://docs.paymongo.com/docs/payment-acceptance-qr-ph-api](https://docs.paymongo.com/docs/payment-acceptance-qr-ph-api)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- QR Ph
-- QR Code
-- In Store
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/payment-acceptance-qr-ph)
-- [API Reference](https://docs.paymongo.com/reference/generate-mpm-qr)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayMongo Webhooks API
-
-Registers, lists, enables, and disables webhook endpoints. Deliveries are signed HTTP POST callbacks (Paymongo-Signature header) for events such as payment.paid, payment.failed, and source.chargeable - not a WebSocket stream.
-
-- **Human URL:** [https://docs.paymongo.com/docs/developer-tools-webhooks](https://docs.paymongo.com/docs/developer-tools-webhooks)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Webhooks
-- Events
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/developer-tools-webhooks)
-- [API Reference](https://docs.paymongo.com/reference/create-a-webhook)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/paymongo.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-
-### PayMongo Subscriptions & Plans API
-
-Creates Plans and Subscriptions for recurring billing, including invoices, on-demand payments, and test-cycle triggers.
-
-- **Human URL:** [https://docs.paymongo.com/reference/subscription-resource](https://docs.paymongo.com/reference/subscription-resource)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Subscriptions
-- Recurring
-- Billing
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/payment-acceptance-subscriptions)
-- [API Reference](https://docs.paymongo.com/reference/create-a-subscription)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### PayMongo Money Movement API
-
-Wallets, Transfers, Batch Transfers, and Payouts to move funds out to banks and e-wallets via InstaPay and PESONet, with reconciliation endpoints.
-
-- **Human URL:** [https://docs.paymongo.com/docs/money-movement-introduction](https://docs.paymongo.com/docs/money-movement-introduction)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Wallets
-- Transfers
-- Payouts
-- Disbursements
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/money-movement-moving-money-with-api)
-- [API Reference](https://docs.paymongo.com/reference/transfer-resource)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### PayMongo Forex API
-
-Locks in a price for converting between the Philippine Peso and supported foreign currencies via Rates and Quotes, settled across the platform.
-
-- **Human URL:** [https://docs.paymongo.com/docs/money-movement-forex](https://docs.paymongo.com/docs/money-movement-forex)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Forex
-- Currency
-- Quotes
-
-#### Properties
-
-- [Documentation](https://docs.paymongo.com/docs/money-movement-forex)
-- [API Reference](https://docs.paymongo.com/reference/quote-resource)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### PayMongo Fraud Detection API
-
-PayMongo Protect - Reviews, Rules, Rule Attributes, and Scores for per-transaction risk scoring and manual review workflows.
-
-- **Human URL:** [https://docs.paymongo.com/reference/fraud-detection-overview](https://docs.paymongo.com/reference/fraud-detection-overview)
-- **Base URL:** `https://api.paymongo.com/v1`
-
-#### Tags
-
-- Fraud
-- Risk
-- Protect
-
-#### Properties
-
-- [API Reference](https://docs.paymongo.com/reference/fraud-detection-overview)
-- [OpenAPI](openapi/paymongo-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/paymongo)
-- [LinkedIn](https://www.linkedin.com/company/paymongo)
 - [Website](https://www.paymongo.com/)
 - [Documentation](https://docs.paymongo.com/)
-- [Plans](plans/paymongo-plans-pricing.yml)
-- [Rate Limits](rate-limits/paymongo-rate-limits.yml)
-- [Fin Ops](finops/paymongo-finops.yml)
+- [Getting started](https://docs.paymongo.com/docs/payment-acceptance-quick-start)
+- [API reference](https://docs.paymongo.com/reference)
+- [Pricing](https://www.paymongo.com/pricing)
+- [Sign up](https://dashboard.paymongo.com/signup)
+- [Blog](https://www.paymongo.com/blog)
+- [Security](https://docs.paymongo.com/docs/keeping-payments-secure)
+- [Compliance](https://www.paymongo.com/secure)
+- [Terms of service](https://www.paymongo.com/terms)
+- [Privacy policy](https://www.paymongo.com/privacy)
+- [GitHub](https://github.com/paymongo)
+- [Status](https://status.paymongo.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 57.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 55.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 48.7 |
+| Developer ergonomics | 63.7 |
+| Access clarity | 61.8 |
+
+**Agent readiness 31.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | paginated |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 44.6** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/paymongo/](https://apis.io/providers/paymongo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for PayMongo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/paymongo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
